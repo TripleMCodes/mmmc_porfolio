@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Portfolio - Admin dash board</title>
+    <link rel="stylesheet" href="{{ url_for('admin.static', filename='manage_portfolio.css') }}">
+    <link rel="stylesheet" href="{{ url_for('admin.static', filename='admin_dashboard.css') }}">
+</head>
+<body>
+    <div class="admin-container">
+
+    <div class="head-wrapper">
+        <h1 class="admin-title">Manage Portfolio</h1>
+    </div>
+
+    <!-- Add Portfolio Section -->
+    <div class="admin-section">
+
+        <h3>Add Portfolio Project</h3>
+
+        <form id="portfolioForm">
+
+            <label>Project Title</label>
+            <input type="text" id="title" required>
+
+            <label>Project Description</label>
+            <textarea id="description" required></textarea>
+
+            <label>Project URL</label>
+            <input type="text" id="url" required>
+
+            <button class="save-btn" type="submit">
+                Add Project
+            </button>
+
+        </form>
+
+    </div>
+
+    <!-- Existing Portfolio Section -->
+    <div class="admin-section">
+
+        <h3>Existing Portfolio Projects</h3>
+
+        <div id="portfolioList" class="portfolio-list">
+
+            {% for sample in samples %}
+                <div class="portfolio-item" id="sample-{{ sample.id }}">
+
+                    <div class="portfolio-title">
+                        {{ sample.title }}
+                    </div>
+
+                    <div class="portfolio-description">
+                        {{ sample.description }}
+                    </div>
+
+                    <a href="{{ sample.project_url }}" 
+                       target="_blank"
+                       class="portfolio-url">
+                        View Project
+                    </a>
+
+                    <div class="portfolio-actions">
+                        <button 
+                            class="delete-btn"
+                            onclick="deleteSample({{ sample.id }})">
+                            Delete
+                        </button>
+                    </div>
+
+                </div>
+            {% endfor %}
+
+            <div class="pagination" id="pagination">
+                <button id="prevBtn">Previous</button>
+                <span id="pageInfo"></span>
+                <button id="nextBtn">Next</button>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+    
+     <script src="{{url_for('admin.static', filename='manage_portfolio.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    {# Use g.artist for consistent branding across your Triple MC personas #}
+    <title>Terms of Service — {{ g.artist.name if g.artist else name.title() }}</title>
+    <link rel="stylesheet" href="{{url_for('home.static', filename='index.css')}}">
+    <link rel="stylesheet" href="{{url_for('terms.static', filename='terms.css')}}">
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+    <nav>
+        <div class="logo">{{ g.artist.name if g.artist else name }}</div>
+        <ul class="nav-links" id="navLinks">
+            {# All navigation items updated with the required artist_slug #}
+            <li><a href="{{ url_for('home.index') }}">Home</a></li>
+            <li><a href="{{ url_for('about.about_route') }}">About</a></li>
+            <li><a href="{{ url_for('media.media_route') }}">Media</a></li>
+            <li><a href="{{ url_for('all_blogs.index') }}">Blog</a></li>
+            <li><a href="{{ url_for('contact.contact_route') }}">Contact</a></li>
+            <li><a href="{{ url_for('events.events_route') }}">Events</a></li>
+            <li><a href="{{ url_for('gallery.gallery_route') }}">Gallery</a></li>
+            <li><a href="{{ url_for('linktree.linktree_route') }}">Linktree</a></li>
+        </ul>
+
+        <div class="h-menu" id="hamburger" aria-label="Toggle menu">
+            <span class="fa fa-bars">☰</span>
+        </div>
+    </nav>
+
+    <header class="terms-hero">
+        <h1>Terms of Service</h1>
+        <p class="terms-intro">These Terms govern your access to and use of the {{ (g.artist.name if g.artist else name).title() }} website and services. Last updated: <span class="last-updated"></span></p>
+    </header>
+
+    <main class="terms-main">
+        <section class="terms-section">
+            <h2>1. Acceptance of Terms</h2>
+            <p>By accessing or using our website and services you agree to be bound by these Terms.</p>
+        </section>
+
+        <section class="terms-section">
+            <h2>2. Services</h2>
+            <p>{{ (g.artist.name if g.artist else name).title() }} provides creative writing, production, consulting, and related services.</p>
+        </section>
+
+        <section class="terms-section">
+            <h2>11. Contact</h2>
+            <p>Questions about these Terms should be directed via the <a href="{{ url_for('contact.contact_route') }}">contact page</a>.</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="social-links">
+            <a href="{{ url_for('terms.terms_route') }}">Terms</a>
+            <a href="{{ url_for('conditions.conditions_route') }}">Conditions</a>
+            <a href="{{ url_for('privacy.privacy_route') }}">Privacy</a>
+        </div>
+        <p>&copy; <span id="date"></span> {{ (g.artist.name if g.artist else name).title() }}. All rights reserved.</p>
+    </footer>
+
+    <script src="{{url_for('home.static', filename='script.js') }}"></script>
+    <script>
+        // Automatic date logic
+        const now = new Date();
+        const oneMonthAgo = new Date(now.getFullYear(), now.getMonth() - 1, now.getDate()).toISOString().split('T')[0];
+        document.querySelector('.last-updated').innerText = oneMonthAgo;
+
+        // Footer year
+        document.querySelector("#date").textContent = now.getFullYear();
+    </script>
+</body>
+</html>

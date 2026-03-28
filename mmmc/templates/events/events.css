@@ -1,0 +1,469 @@
+/* =========================
+   EVENTS PAGE — NEON DARK PURPLE / FUTURISTIC
+========================= */
+
+:root{
+  --bg-0: #05010b;
+  --bg-1: #0b0317;
+  --bg-2: #140426;
+  --bg-3: #1d0735;
+
+  --neon: #c400ff;
+  --neon-2: #8f3dff;
+  --neon-3: #f05dff;
+
+  --neon-soft: rgba(196, 0, 255, 0.16);
+  --neon-soft-2: rgba(143, 61, 255, 0.12);
+  --neon-line: rgba(214, 115, 255, 0.18);
+  --neon-glow: rgba(196, 0, 255, 0.38);
+
+  --white: #f8f1ff;
+  --text: #eadbff;
+  --text-soft: rgba(234, 219, 255, 0.74);
+  --text-faint: rgba(234, 219, 255, 0.52);
+
+  --glass: rgba(20, 8, 38, 0.64);
+  --glass-strong: rgba(25, 10, 46, 0.78);
+
+  --line: rgba(214, 115, 255, 0.12);
+
+  --radius-xl: 28px;
+  --radius-lg: 22px;
+  --radius-md: 18px;
+  --radius-pill: 999px;
+
+  --blur: 14px;
+
+  --shadow-md: 0 14px 44px rgba(0,0,0,0.18);
+  --shadow-lg: 0 18px 64px rgba(0,0,0,0.24);
+  --shadow-xl: 0 24px 78px rgba(0,0,0,0.30);
+
+  --ease: 0.2s ease;
+}
+
+/* =========================
+   HERO
+========================= */
+.events-hero{
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  padding: 4.6rem 1.25rem 3rem;
+  border-bottom: 1px solid var(--line);
+  background:
+    radial-gradient(circle at 50% 35%, rgba(196, 0, 255, 0.14), transparent 28%),
+    radial-gradient(circle at 50% 55%, rgba(143, 61, 255, 0.12), transparent 42%),
+    linear-gradient(180deg, rgba(20,4,38,0.82), rgba(7,2,14,0.94));
+}
+
+.events-hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.02) 28%, transparent 54%),
+    radial-gradient(circle at 20% 25%, rgba(240,93,255,0.08), transparent 22%),
+    radial-gradient(circle at 80% 20%, rgba(143,61,255,0.08), transparent 18%);
+}
+
+.events-hero::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:56%;
+  transform: translate(-50%, -50%);
+  width: min(620px, 88vw);
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,0.14), transparent 18%),
+    radial-gradient(circle at 50% 50%, rgba(240,93,255,0.10), transparent 34%),
+    radial-gradient(circle at 50% 50%, rgba(196,0,255,0.18), transparent 56%),
+    radial-gradient(circle at 50% 50%, rgba(143,61,255,0.10), transparent 74%);
+  box-shadow:
+    0 0 80px rgba(196,0,255,0.14),
+    0 0 150px rgba(143,61,255,0.08);
+  animation: eventsHeroPulse 6s ease-in-out infinite;
+}
+
+.events-hero > *{
+  position: relative;
+  z-index: 1;
+}
+
+.events-hero h1{
+  font-size: clamp(2rem, 4vw, 3rem);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--white);
+  text-shadow:
+    0 0 12px rgba(196,0,255,0.18),
+    0 0 30px rgba(196,0,255,0.10);
+  margin-bottom: 0.85rem;
+}
+
+.events-hero h1::after{
+  content:"";
+  display:block;
+  width: 96px;
+  height: 2px;
+  margin: 1rem auto 0;
+  background: linear-gradient(90deg, transparent, var(--neon), transparent);
+  box-shadow: 0 0 12px var(--neon-glow);
+}
+
+.events-intro{
+  max-width: 760px;
+  margin: 0 auto;
+  color: var(--text-soft);
+  font-size: 1.02rem;
+  line-height: 1.85;
+}
+
+@keyframes eventsHeroPulse{
+  0%,100%{
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.92;
+  }
+  50%{
+    transform: translate(-50%, -50%) scale(1.05);
+    opacity: 1;
+  }
+}
+
+/* =========================
+   SECTIONS
+========================= */
+.page > section{
+  position: relative;
+  max-width: 1100px;
+  margin: 2.4rem auto;
+  padding: 2.2rem 1.4rem;
+  border-radius: var(--radius-xl);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.02)),
+    rgba(18, 7, 32, 0.68);
+  border: 1px solid var(--line);
+  box-shadow:
+    var(--shadow-lg),
+    inset 0 0 0 1px rgba(255,255,255,0.02);
+  backdrop-filter: blur(var(--blur));
+  -webkit-backdrop-filter: blur(var(--blur));
+  overflow: hidden;
+}
+
+.page > section::before{
+  content:"";
+  position:absolute;
+  inset:-30%;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(196,0,255,0.12), transparent 26%),
+    radial-gradient(circle at 80% 70%, rgba(143,61,255,0.10), transparent 30%);
+  opacity: 0.88;
+  pointer-events:none;
+}
+
+.page > section > *{
+  position: relative;
+  z-index: 1;
+}
+
+/* =========================
+   SECTION HEADER
+========================= */
+.section-header{
+  text-align: center;
+  margin-bottom: 1.6rem;
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--white);
+}
+
+.section-header::after{
+  content:"";
+  display:block;
+  width: 88px;
+  height: 2px;
+  margin: 0.9rem auto 0;
+  background: linear-gradient(90deg, transparent, var(--neon), transparent);
+  box-shadow: 0 0 12px var(--neon-glow);
+}
+
+/* =========================
+   EVENTS GRID
+========================= */
+.events-grid{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.2rem;
+}
+
+/* =========================
+   EVENT CARD
+========================= */
+.event-card{
+  position: relative;
+  overflow: hidden;
+  min-width: 0;
+  padding: 1.4rem;
+  border-radius: var(--radius-lg);
+
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.02)),
+    rgba(24, 10, 42, 0.72);
+  border: 1px solid rgba(214,115,255,0.14);
+  box-shadow: var(--shadow-md);
+  transition:
+    transform var(--ease),
+    border-color var(--ease),
+    background var(--ease),
+    box-shadow var(--ease);
+}
+
+.event-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(196,0,255,0.12), transparent 24%),
+    radial-gradient(circle at 80% 80%, rgba(143,61,255,0.10), transparent 26%);
+  pointer-events:none;
+  opacity: 0.9;
+}
+
+.event-card > *{
+  position: relative;
+  z-index: 1;
+}
+
+.event-card:hover{
+  transform: translateY(-4px);
+  border-color: rgba(214,115,255,0.32);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.025)),
+    rgba(28, 11, 48, 0.82);
+  box-shadow:
+    var(--shadow-xl),
+    0 0 24px rgba(196,0,255,0.08);
+}
+
+/* =========================
+   EVENT TEXT HIERARCHY
+========================= */
+.event-date{
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 0.7rem;
+  padding: 0.45rem 0.8rem;
+  border-radius: var(--radius-pill);
+  background: rgba(196,0,255,0.08);
+  border: 1px solid rgba(214,115,255,0.18);
+  color: var(--white);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.02),
+    0 0 18px rgba(196,0,255,0.06);
+}
+
+.event-time,
+.event-location{
+  color: var(--text-faint);
+  font-size: 0.92rem;
+  line-height: 1.65;
+  margin-bottom: 0.4rem;
+}
+
+.event-title{
+  font-size: 1.12rem;
+  font-weight: 900;
+  color: var(--white);
+  line-height: 1.4;
+  margin-bottom: 0.55rem;
+  overflow-wrap: anywhere;
+}
+
+.event-desc{
+  color: var(--text-soft);
+  font-size: 0.95rem;
+  line-height: 1.8;
+  margin-top: 0.6rem;
+  overflow-wrap: anywhere;
+}
+
+/* =========================
+   ACTIONS
+========================= */
+.event-actions{
+  display: flex;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.event-btn,
+.cta-button{
+  display: inline-block;
+  text-decoration: none;
+  border-radius: var(--radius-pill);
+  transition: transform var(--ease), box-shadow var(--ease), background var(--ease);
+}
+
+.event-btn{
+  padding: 0.7rem 1rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: #fff;
+  background: linear-gradient(135deg, var(--neon-2), var(--neon));
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow:
+    0 10px 30px rgba(143,61,255,0.24),
+    0 0 24px rgba(196,0,255,0.16);
+}
+
+.event-btn:hover{
+  transform: translateY(-2px);
+  box-shadow:
+    0 18px 44px rgba(143,61,255,0.28),
+    0 0 34px rgba(196,0,255,0.20);
+}
+
+/* =========================
+   EMPTY STATE
+========================= */
+.events-grid p[style]{
+  color: var(--text-faint) !important;
+  grid-column: 1 / -1 !important;
+  text-align: center !important;
+  padding: 1.5rem;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(214,115,255,0.10);
+}
+
+/* =========================
+   CTA SECTION
+========================= */
+.cta-section{
+  text-align: center;
+  background:
+    radial-gradient(circle at 50% 18%, rgba(240,93,255,0.08), transparent 34%),
+    radial-gradient(circle at 50% 30%, rgba(143,61,255,0.10), transparent 46%),
+    linear-gradient(180deg, rgba(18, 7, 32, 0.72), rgba(10, 4, 20, 0.80)) !important;
+}
+
+.cta-section h2{
+  font-size: clamp(1.35rem, 2.5vw, 2rem);
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 1rem;
+  text-shadow: 0 0 18px rgba(196,0,255,0.14);
+}
+
+.cta-section p{
+  color: var(--text-soft) !important;
+  margin-bottom: 1.4rem !important;
+  line-height: 1.8;
+}
+
+.cta-button{
+  padding: 0.95rem 2.1rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #fff;
+  background: linear-gradient(135deg, var(--neon-2), var(--neon));
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow:
+    0 10px 30px rgba(143,61,255,0.24),
+    0 0 24px rgba(196,0,255,0.16);
+}
+
+.cta-button:hover{
+  transform: translateY(-2px);
+  box-shadow:
+    0 18px 44px rgba(143,61,255,0.30),
+    0 0 34px rgba(196,0,255,0.20);
+}
+
+/* =========================
+   INLINE STYLE OVERRIDES
+========================= */
+.cta-section[style]{
+  max-width: 1000px !important;
+  margin: 3rem auto !important;
+  padding: 2rem 5% !important;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 900px){
+  .events-grid{
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px){
+  .events-hero{
+    padding: 3.8rem 1rem 2.5rem;
+  }
+
+  .page > section{
+    margin: 1.6rem auto;
+    padding: 1.4rem 1rem;
+    border-radius: 22px;
+  }
+
+  .section-header{
+    font-size: 1rem;
+    letter-spacing: 0.14em;
+  }
+
+  .event-card{
+    padding: 1.15rem;
+  }
+
+  .event-title{
+    font-size: 1rem;
+  }
+
+  .event-desc{
+    font-size: 0.93rem;
+  }
+
+  .cta-button,
+  .event-btn{
+    font-size: 0.74rem;
+  }
+}
+
+@media (max-width: 480px){
+  .events-hero h1{
+    font-size: 1.7rem;
+    letter-spacing: 0.12em;
+  }
+
+  .events-intro{
+    font-size: 0.95rem;
+  }
+
+  .event-actions{
+    width: 100%;
+  }
+
+  .event-btn,
+  .cta-button{
+    width: 100%;
+    text-align: center;
+  }
+}

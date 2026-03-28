@@ -1,0 +1,256 @@
+
+body{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+.admin-container {
+    /* display: flex; */
+    /* align-items: center;
+    flex-direction: column;
+    justify-content: center; */
+    /* max-width: 900px; */
+    margin: 3rem;
+    padding: 2rem;
+    padding-right: 4rem;
+    background: rgba(30, 41, 59, 0.6);
+    border-radius: 20px;
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+.admin-title {
+    text-align: center;
+    font-size: 2.3rem;
+    margin-bottom: 2rem;
+    background: linear-gradient(135deg, #a855f7 0%, #c084fc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.admin-section {
+    margin-bottom: 3rem;
+}
+
+.admin-section h3 {
+    color: #a855f7;
+    margin-bottom: 1rem;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 10px;
+    border: 1px solid rgba(168,85,247,0.3);
+    background: rgba(15,23,42,0.6);
+    color: #e0e0e0;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    outline: none;
+}
+
+textarea {
+    height: 150px;
+    resize: vertical;
+}
+
+input[type="file"] {
+    margin-top: 1rem;
+    color: #c4b5fd;
+}
+
+.save-btn {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.8rem 2rem;
+    background: linear-gradient(135deg, #a855f7 0%, #8b5cf6 100%);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.save-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(168,85,247,0.5);
+}
+
+.skills-list {
+    margin-top: 1rem;
+}
+
+.skill-item {
+    background: rgba(255,255,255,0.05);
+    padding: 0.6rem 1rem;
+    border-radius: 10px;
+    display: inline-block;
+    margin: 0.3rem;
+    border: 1px solid rgba(168,85,247,0.3);
+}
+
+.delete-skill-btn {
+    background: none;
+    border: none;
+    color: #ff6b6b;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-left: 0.5rem;
+}
+
+.delete-skill-btn:hover {
+    color: #ff5252;
+}
+
+.add-skill-box {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.add-skill-box input {
+    flex: 1;
+}
+
+.notification .off{
+    display: none;
+}
+
+.off{
+    display: none;
+}
+
+.notification .on{
+    display: flex;
+    color: rgba(255,255,255,0.05);
+    background: #a855f7;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.head-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+@media (max-width: 360px) {
+    h1 {
+        margin-top:4rem;
+    }
+    .admin-container {
+        margin: 1.5rem 0.8rem;
+        padding: 1.2rem;
+        border-radius: 14px;
+    }
+
+    .admin-title {
+        font-size: 1.6rem;
+    }
+
+    .save-btn {
+        width: 100%;
+        padding: 0.7rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    input[type="text"],
+    textarea {
+        font-size: 0.9rem;
+        padding: 0.8rem;
+    }
+
+    .add-skill-box {
+        flex-direction: column;
+        gap: 0.6rem;
+    }
+
+    nav .logo {
+        font-size: 1rem;
+    }
+}
+
+@media (min-width: 361px) and (max-width: 480px) {
+    h1 {
+        margin-top:4rem;
+    }
+    .admin-container {
+        margin: 2rem 1rem;
+        padding: 1.5rem;
+    }
+
+    .admin-title {
+        font-size: 1.8rem;
+    }
+
+    .save-btn {
+        width: 100%;
+    }
+
+    .add-skill-box {
+        flex-direction: column;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+    .admin-container {
+        margin: 2.5rem 1.5rem;
+        padding: 1.8rem;
+    }
+
+    .admin-title {
+        font-size: 2rem;
+    }
+
+    .save-btn {
+        padding: 0.8rem 1.6rem;
+    }
+
+    .add-skill-box {
+        flex-direction: row;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .admin-container {
+        max-width: 760px;
+        padding: 2rem;
+    }
+
+    .admin-title {
+        font-size: 2.2rem;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .admin-container {
+        max-width: 760px;
+        padding: 2rem;
+    }
+
+    .admin-title {
+        font-size: 2.2rem;
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1440px) {
+    .admin-container {
+        max-width: 900px;
+    }
+}
+
+@media (min-width: 1441px) {
+    .admin-container {
+        max-width: 1000px;
+    }
+
+    .admin-title {
+        font-size: 2.5rem;
+    }
+}
+

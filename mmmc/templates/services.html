@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Services — {{ name.title() }}
+{% endblock %}
+
+{% block page_css %}
+ <link rel="stylesheet" href="{{url_for('home.static', filename='index.css')}}">
+<link rel="stylesheet" href="{{url_for('service.static', filename='services.css')}}">
+{% endblock %}
+
+{% block header %}
+    <header class="services-hero">
+            <h1>Services & Pricing</h1>
+            <p class="intro-copy">Transparent offerings for artists, creators, and brands. Choose a plan to begin a collaboration—custom scopes are available on request.</p>
+    </header>
+{% endblock %}
+
+{% block content %}
+    <section class="main-section" style="max-width:1100px;margin:0 auto;padding:0 5%;">
+            <div style="text-align:center;margin-bottom:1rem;">
+                <div class="pricing-toggle" aria-hidden="false">
+                    <span style="color:#c4b5fd;font-weight:600">Billing:</span>
+                    <label style="display:inline-flex;align-items:center;gap:0.5rem;color:#9ca3af;">
+                        <input type="checkbox" id="billingToggle"> <small>Yearly (save 15%)</small>
+                    </label>
+                </div>
+            </div>
+
+            <div class="pricing-grid">
+                {% for service in services %}
+                <div class="plan-card">
+                    <div class="plan-name">{{ service.title }}</div>
+                    <div class="plan-price" data-month="${{ service.price_monthly or 0 }}" data-year="${{ service.price_yearly or 0 }}">${{ service.price_monthly or 0 }}</div>
+                    <div class="plan-features">
+                        <div>{{ service.description }}</div>
+                    </div>
+                    <a class="plan-cta" href="{{url_for('contact.contact_route')}}">Start Project</a>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="faq">
+                <h3>Frequently Asked</h3>
+                {% for quiz_ans in faq %}
+                    <p><strong>{{quiz_ans.question}}</strong> {{quiz_ans.answer}}</p>
+                {% endfor %}
+                <!-- <h3>Frequently Asked</h3>
+                <p><strong>Do you accept custom work?</strong> Yes — reach out with your brief and we'll scope a custom package.</p>
+                <p><strong>What are the turnaround times?</strong> Starter: ~3-5 business days. Professional: ~5-10 business days. Enterprise: depends on scope.</p>
+                <p><strong>How does ghostwriting confidentiality work?</strong> Full NDAs available; discretion is standard.</p> -->
+            </div>
+        </section>
+
+        <section class="cta-section" style="max-width:900px;margin:2.5rem auto;padding:2rem 5%;text-align:center;">
+            <h2>Ready to craft something singular?</h2>
+            <p style="color:#d1d5db;">Start with a brief and we'll respond with availability and next steps.</p>
+            <a class="cta-button" href="{{url_for('contact.contact_route')}}">Contact Xarya</a>
+        </section>
+{% endblock %}
+
+{% block page_js %}
+ <script src="{{url_for('service.static', filename='services.js')}}"></script>
+{% endblock %}

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Gallery — {{ name.title() }}</title>
+  <link rel="stylesheet" href="{{url_for('gallery.static', filename='gallery.css')}}">
+  <link rel="stylesheet" href="{{ url_for('home.static', filename='index.css') }}">
+</head>
+<body>
+  <div class="particles" id="particles"></div>
+
+  <nav>
+    <div class="logo">{{ name.title() }}</div>
+    <ul class="nav-links" id="navLinks">
+        {# Required artist_slug added to all nav items #}
+        <li><a href="{{ url_for('home.index') }}">Home</a></li>
+        <li><a href="{{ url_for('about.about_route') }}">About</a></li>
+        <li><a href="{{ url_for('media.media_route') }}">Media</a></li>
+        <li><a href="{{ url_for('all_blogs.index') }}">Blog</a></li>
+        <li><a href="{{ url_for('contact.contact_route') }}">Contact</a></li>
+        <li><a href="{{ url_for('events.events_route') }}">Events</a></li>
+        <li><a href="{{ url_for('gallery.gallery_route') }}">Gallery</a></li>
+        <li><a href="{{ url_for('linktree.linktree_route') }}">Linktree</a></li>
+    </ul>
+
+    <div class="h-menu" id="hamburger" aria-label="Toggle menu">
+        <span class="fa fa-bars">☰</span>
+    </div>
+  </nav>
+
+  <header class="gallery-hero">
+    <h1>Gallery</h1>
+    <p>Visual transmissions from the world of {{ name.title() }}.</p>
+  </header>
+
+  <main class="gallery-main">
+    <section>
+      <h2 class="section-header">Filter Content</h2>
+      <div class="filters" id="filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="images">Images</button>
+        <button class="filter-btn" data-filter="videos">Videos</button>
+      </div>
+
+      <div class="grid" id="galleryGrid">
+        {% for item in gallery_items %}
+            {% if item.type == 'image' %}
+            <div class="thumb" data-type="images" data-title="{{ item.title }}" data-src="{{ url_for('gallery.static', filename='img/' + item.url) }}">
+              <img src="{{ url_for('gallery.static', filename='img/' + item.url) }}" alt="{{ item.title }}">
+              <div class="tag">Image</div>
+            </div>
+            {% elif item.type == 'video' %}
+            <div class="thumb" data-type="videos" data-title="{{ item.title }}" data-video="{{ item.video_id }}">
+              <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;padding:10px;text-align:center">
+                {{ item.title }}
+              </div>
+              <div class="play">▶</div>
+              <div class="tag">Video</div>
+            </div>
+            {% endif %}
+        {% else %}
+            <p style="color:#9ca3af; text-align:center; grid-column: 1/-1;">The gallery is currently empty.</p>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section style="margin-top:1.5rem">
+      <h2 class="section-header">Featured Videos</h2>
+      <div class="videos-grid">
+        {% for item in gallery_items if item.type == 'video' %}
+        <div class="video-thumb">
+          <iframe src="https://www.youtube.com/embed/{{ item.video_id }}" title="{{ item.title }}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+  </main>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lb-inner" role="dialog" aria-modal="true">
+      <div class="lb-media" id="lbMedia">
+        <button class="lb-close" id="lbClose">Close ✕</button>
+        <div class="lb-nav">
+          <button class="nav-btn" id="prevBtn">◀</button>
+          <button class="nav-btn" id="nextBtn">▶</button>
+        </div>
+      </div>
+      <aside class="lb-info" id="lbInfo">
+        <div class="lb-title" id="lbTitle"></div>
+        <div class="lb-meta" id="lbMeta"></div>
+        <a href="#" id="lbExternal" class="action-link" style="margin-top:8px">Open Source</a>
+      </aside>
+    </div>
+  </div>
+
+  <footer>
+    <div class="social-links">
+      {# artist_slug added to footer routes #}
+      <a href="{{ url_for('terms.terms_route') }}">Terms</a>
+      <a href="{{ url_for('conditions.conditions_route') }}">Conditions</a>
+      <a href="{{ url_for('privacy.privacy_route') }}">Privacy</a>
+    </div>
+    <p>&copy; <span id="date"></span> {{ (g.artist.name if g.artist else name).title() }}. All rights reserved.</p>
+  </footer>
+
+  <script src="{{ url_for('home.static', filename='script.js') }}"></script>
+  <script src="{{ url_for('gallery.static', filename='gallery.js') }}"></script>
+</body>
+</html>

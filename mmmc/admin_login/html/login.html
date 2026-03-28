@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+
+    <!-- Link your uploaded stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('home.static', filename='styles.css') }}">
+
+    <style>
+        /* ===== Login Page Overrides (kept consistent with your theme) ===== */
+
+        .login-container {
+            position: relative;
+            z-index: 10;
+            max-width: 450px;
+            margin: 6rem auto;
+            padding: 2.5rem;
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(168, 85, 247, 0.4);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(168, 85, 247, 0.3);
+            backdrop-filter: blur(12px);
+            text-align: center;
+        }
+
+        .login-title {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #a855f7, #c084fc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 2rem;
+            letter-spacing: 2px;
+        }
+
+        .login-field {
+            text-align: left;
+            margin-bottom: 1.5rem;
+        }
+
+        .login-field label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #c4b5fd;
+            font-weight: 500;
+        }
+
+        .login-field input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            border: 1px solid rgba(168, 85, 247, 0.4);
+            background: rgba(15, 23, 42, 0.6);
+            color: #e0e0e0;
+            font-size: 1rem;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .login-field input:focus {
+            border-color: #a855f7;
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.5);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 0.9rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            background: linear-gradient(135deg, #a855f7 0%, #8b5cf6 100%);
+            color: white;
+            transition: 0.3s;
+            box-shadow: 0 6px 20px rgba(168, 85, 247, 0.4);
+        }
+
+        .login-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.6);
+        }
+
+        .particles {
+            z-index: -1; /* ensures background stays behind everything */
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Particles Background (matches your site) -->
+    <!-- <div class="particles">
+        {% for i in range(30) %}
+            <div class="particle"
+                style="width: {{ range(10, 40) | random }}px;
+                       height: {{ range(10, 40) | random }}px;
+                       top: {{ range(0, 100) | random }}%;
+                       left: {{ range(0, 100) | random }}%;
+                       animation-duration: {{ range(12, 30) | random }}s;">
+            </div>
+        {% endfor %}
+    </div> -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Login Box -->
+    <div class="login-container">
+        <h2 class="login-title">Admin Login</h2>
+
+        <form action="{{ url_for('admin.admin_login') }}" method="POST">
+            <div class="login-field">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required placeholder="Enter your email">
+            </div>
+
+            <div class="login-field">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required placeholder="Enter your password">
+            </div>
+
+            <button class="login-btn" type="submit">Login</button>
+        </form>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Messages — Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('home.static', filename='index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('admin.static', filename='manage_messages.css') }}">
+</head>
+<body>
+
+    <nav>
+        <div class="logo">Artist Admin</div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="{{ url_for('admin.admin_dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('admin.manage_messages') }}">Manage Messages</a></li>
+        </ul>
+
+        <div class="h-menu" id="hamburger" aria-label="Toggle menu">
+            <span class="fa fa-bars">t</span>
+        </div>
+    </nav>
+
+    <main class="admin-container">
+        <h1 class="admin-title">Manage Messages</h1>
+
+        <div class="notification" id="msgBox"></div>
+
+        <div class="messages-list">
+            {% if messages %}
+                {% for message in messages %}
+                <div class="message-item {% if not message.read %}unread{% endif %}">
+                    <div class="message-header">
+                        <div class="message-sender">{{ message.name }} &lt;{{ message.email }}&gt;</div>
+                        <div class="message-date">{{ message.date.strftime('%Y-%m-%d %H:%M') }}</div>
+                    </div>
+
+                    <div class="message-details">
+                        <p><strong>Project Type:</strong> {{ message.project_type }}</p>
+                        <p><strong>Budget:</strong> {{ message.budget }}</p>
+                        <p><strong>NDA Requested:</strong> {{ 'Yes' if message.nda_requested else 'No' }}</p>
+                    </div>
+
+                    <div class="message-content">{{ message.message }}</div>
+
+                    <div class="message-actions">
+                        {% if not message.read %}
+                        <button class="mark-read-btn" onclick="markAsRead('{{ message.id }}')">Mark as Read</button>
+                        {% endif %}
+                        <button class="delete-btn" onclick="deleteMessage('{{ message.id }}')">Delete</button>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="no-messages">
+                    <p>No messages yet.</p>
+                </div>
+            {% endif %}
+        </div>
+    </main>
+
+    <script>
+        function notify(message) {
+            const msgBox = document.getElementById('msgBox');
+            msgBox.textContent = message;
+            msgBox.classList.add('on');
+            setTimeout(() => msgBox.classList.remove('on'), 5000);
+        }
+
+        function markAsRead(id) {
+            fetch(`/mark message read/${id}`, { method: 'POST' })
+            .then(response => response.json())
+            .then(data => {
+                notify(data.message);
+                location.reload();
+            })
+            .catch(err => notify('Error marking message as read'));
+        }
+
+        function deleteMessage(id) {
+            if (confirm('Are you sure you want to delete this message?')) {
+                fetch(`/delete message/${id}`, { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    notify(data.message);
+                    location.reload();
+                })
+                .catch(err => notify('Error deleting message'));
+            }
+        }
+
+    const hamburger = document.getElementById("hamburger");
+    const navLinks = document.getElementById("navLinks");
+
+    hamburger.addEventListener("click", () => {
+            navLinks.classList.toggle("active");
+            }
+        )
+    </script>
+</body>
+</html>

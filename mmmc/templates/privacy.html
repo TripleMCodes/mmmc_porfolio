@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Privacy Policy — {{name.title()}}
+{% endblock %}
+
+{% block page_css %}
+  <link rel="stylesheet" href="{{url_for('privacy.static', filename='privacy.css')}}">
+{% endblock %}
+
+{% block header %}
+  <header class="policy-hero">
+        <h1>Privacy Policy</h1>
+        <p class="policy-intro">This policy explains what information we collect, how we use it, and the choices you have. Last updated: <span class="last-updated"></span>.</p>
+    </header>
+{% endblock %}
+
+{% block content %}
+    <section class="policy-section">
+        <h2>1. Scope</h2>
+        <p>This Privacy Policy applies to information collected through the {{name.title()}} website and any related services provided by {{name.title()}} ("we", "us", "the site"). It does not apply to information collected offline or by third parties unaffiliated with us.</p>
+    </section>
+
+        <section class="policy-section">
+            <h2>2. Information We Collect</h2>
+            <p>We collect only the information necessary to provide our services and respond to inquiries. This may include:</p>
+            <ul>
+                <li><strong>Personal information:</strong> name, email address, project details and other information you provide when contacting us or requesting a quote.</li>
+                <li><strong>Usage information:</strong> pages visited, referring site, device and browser information, IP address, and analytics data collected automatically.</li>
+                <li><strong>Cookies and similar technologies:</strong> small files used to enhance site functionality and measure usage.</li>
+            </ul>
+        </section>
+
+        <section class="policy-section">
+            <h2>3. How We Use Your Information</h2>
+            <p>We use information to:</p>
+            <ul>
+                <li>Respond to inquiries and provide quotes.</li>
+                <li>Deliver and improve our website and services.</li>
+                <li>Send transactional messages such as appointment confirmations and replies to enquiries.</li>
+                <li>Analyze site usage and detect abuse or fraud.</li>
+            </ul>
+        </section>
+
+        <section class="policy-section">
+            <h2>4. Sharing & Disclosure</h2>
+            <p>We do not sell your personal information. We may share information with:</p>
+            <ul>
+                <li>Service providers who help operate the site (hosting, analytics, email delivery).</li>
+                <li>Legal authorities where required by law or to protect rights and safety.</li>
+            </ul>
+        </section>
+
+        <section class="policy-section">
+            <h2>5. Cookies & Tracking</h2>
+            <p>Cookies and similar technologies are used to provide basic site functionality and to gather analytics. You can control cookies through your browser settings. Blocking certain cookies may limit functionality.</p>
+        </section>
+
+        <section class="policy-section">
+            <h2>6. Data Retention</h2>
+            <p>We retain personal data only as long as needed to fulfill the purposes described or as required by law. Inquiries and quote records are retained for a reasonable period to support customer service and compliance.</p>
+        </section>
+
+        <section class="policy-section">
+            <h2>7. Security</h2>
+            <p>We take reasonable measures to protect information from unauthorized access, loss, or misuse. No system is completely secure; if a breach occurs we will follow applicable notification requirements.</p>
+        </section>
+
+        <section class="policy-section">
+            <h2>8. Your Rights</h2>
+            <p>Depending on your jurisdiction, you may have rights to access, correct, delete, or export your personal data. To exercise these rights, contact us at <a href="{{url_for('contact.contact_route')}}">the contact page</a> or by email at <strong>{{email}}</strong>. We will respond in accordance with applicable law.</p>
+        </section>
+
+        <section class="policy-section">
+            <h2>9. Third-Party Links</h2>
+            <p>Our site may contain links to third-party sites. We are not responsible for the privacy practices or content of those sites. Please review their policies before providing personal information.</p>
+        </section>
+
+        <section class="policy-section">
+            <h2>10. Children</h2>
+            <p>Our services are not directed at children under 13. We do not knowingly collect personal information from children. If you believe we have collected such information, please contact us to request deletion.</p>
+        </section>
+
+        <section class="policy-section">
+            <h2>11. Changes to This Policy</h2>
+            <p>We may update this policy occasionally. When we make material changes we will update the "Last updated" date and, where appropriate, provide additional notice.</p>
+        </section>
+
+        <section class="policy-section">
+            <h2>12. Contact</h2>
+            <p>For questions or requests regarding this policy, contact us via the <a href="{{url_for('contact.contact_route')}}">contact page</a> or email <strong>{{email}}</strong>.</p>
+        </section>
+{% endblock %}
+
+{% block page_js %}
+  <script src="{{ url_for('privacy.static', filename='privacy.js') }}"></script>
+{% endblock %}

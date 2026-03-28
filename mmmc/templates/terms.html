@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Terms of Service — {{ name.title() }}
+{% endblock %}
+
+{% block page_css %}
+   <link rel="stylesheet" href="{{url_for('terms.static', filename='terms.css')}}">
+{% endblock %}
+
+{% block header %}
+    <header class="terms-hero">
+        <h1>Terms of Service</h1>
+        <p class="terms-intro">These Terms govern your access to and use of the {{ name.title() }} website and services. Last updated: <span class="last-updated"></span></p>
+    </header>
+{% endblock %}
+
+{% block content %}
+  <section class="terms-section">
+        <h2>1. Acceptance of Terms</h2>
+        <p>By accessing or using our website and services you agree to be bound by these Terms.</p>
+    </section>
+
+    <section class="terms-section">
+        <h2>2. Services</h2>
+        <p>{{ name.title() }} provides creative writing, production, consulting, and related services.</p>
+    </section>
+
+    <section class="terms-section">
+        <h2>11. Contact</h2>
+        <p>Questions about these Terms should be directed via the <a href="{{ url_for('contact.contact_route') }}">contact page</a>.</p>
+    </section>
+{% endblock %}
+
+{% block page_js %}
+  <script src="{{ url_for('terms.static', filename='terms.js') }}"></script>
+{% endblock %}

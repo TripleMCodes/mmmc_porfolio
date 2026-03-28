@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Blogs — Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('home.static', filename='index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('admin.static', filename='manage_blogs.css') }}">
+</head>
+<body>
+
+    <nav>
+        <div class="logo">Artist Admin</div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="{{ url_for('admin.admin_dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('admin.manage_blogs') }}">Manage Blogs</a></li>
+        </ul>
+
+        <div class="h-menu" id="hamburger" aria-label="Toggle menu">
+            <span class="fa fa-bars"></span>
+        </div>
+    </nav>
+
+    <main class="admin-container">
+        <h1 class="admin-title">Manage Blogs</h1>
+
+        <div class="notification" id="msgBox"></div>
+
+        <div class="blog-list">
+            <h3>Existing Blogs</h3>
+            {% for blog in blogs %}
+            <div class="blog-item">
+                <div>
+                    <h3>{{ blog.title }}</h3>
+                    <p>{{ blog.excerpt }}</p>
+                    <small>{{ blog.date.strftime('%B %d, %Y') }}</small>
+                </div>
+                <div class="blog-actions">
+                    <button class="edit-btn" data-id="{{ blog.id }}" data-title="{{ blog.title }}" data-excerpt="{{ blog.excerpt }}" data-content="{{ blog.content }}" onclick="editBlogFromButton(this)">Edit</button>
+                    <button class="delete-btn" data-id="{{ blog.id }}" onclick="deleteBlog(this.dataset.id)">Delete</button>
+                </div>
+            </div>
+            {% endfor %}
+
+            <div class="pagination-container">
+            {% if pagination and pagination.pages > 1 %}
+                <div class="pagination" aria-label="Blog pagination">
+                    <!-- Prev -->
+                    {% if pagination.has_prev %}
+                    <a class="page-btn"
+                        href="{{ url_for('admin.manage_blogs', page=pagination.prev_num, per_page=per_page) }}"
+                        rel="prev">← Prev</a>
+                    {% else %}
+                    <span class="page-btn disabled">← Prev</span>
+                    {% endif %}
+
+                    <!-- Page numbers -->
+                    <div class="page-numbers">
+                    {% for p in pagination.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                        {% if p %}
+                        {% if p == pagination.page %}
+                            <span class="page-number active" aria-current="page">{{ p }}</span>
+                        {% else %}
+                            <a class="page-number"
+                            href="{{ url_for('admin.manage_blogs', page=p, per_page=per_page) }}">{{ p }}</a>
+                        {% endif %}
+                        {% else %}
+                        <span class="page-ellipsis">…</span>
+                        {% endif %}
+                    {% endfor %}
+                    </div>
+
+                    <!-- Next -->
+                    {% if pagination.has_next %}
+                    <a class="page-btn"
+                        href="{{ url_for('admin.manage_blogs', page=pagination.next_num, per_page=per_page) }}"
+                        rel="next">Next →</a>
+                    {% else %}
+                    <span class="page-btn disabled">Next →</span>
+                    {% endif %}
+                </div>
+            {% endif %}
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h3 id="formTitle">Create New Blog</h3>
+            <input type="text" id="blogTitle" placeholder="Blog Title" required>
+            <input type="text" id="blogExcerpt" placeholder="Short Excerpt" required>
+            <textarea id="blogContent" placeholder="Full Content" required></textarea>
+            <button class="save-btn" id="saveBtn" onclick="saveBlog()">Save Blog</button>
+        </div>
+    </main>
+
+    <script>
+        let editingId = null;
+
+        function notify(message) {
+            const msgBox = document.getElementById('msgBox');
+            msgBox.textContent = message;
+            msgBox.classList.add('on');
+            setTimeout(() => msgBox.classList.remove('on'), 5000);
+        }
+
+        function editBlogFromButton(button) {
+            const id = button.dataset.id;
+            const title = button.dataset.title;
+            const excerpt = button.dataset.excerpt;
+            const content = button.dataset.content;
+
+            editingId = id;
+            document.getElementById('formTitle').textContent = 'Edit Blog';
+            document.getElementById('blogTitle').value = title;
+            document.getElementById('blogExcerpt').value = excerpt;
+            document.getElementById('blogContent').value = content;
+            document.getElementById('saveBtn').textContent = 'Update Blog';
+        }
+
+        function saveBlog() {
+            const title = document.getElementById('blogTitle').value;
+            const excerpt = document.getElementById('blogExcerpt').value;
+            const content = document.getElementById('blogContent').value;
+
+            if (!title || !excerpt || !content) {
+                notify('All fields are required');
+                return;
+            }
+
+            const url = editingId ? `/edit blog/${editingId}` : '/create blog';
+            const method = 'POST';
+
+            fetch(url, {
+                method: method,
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ title, excerpt, content })
+            })
+            .then(response => response.json())
+            .then(data => {
+                notify(data.message);
+                if (data.message.includes('created') || data.message.includes('updated')) {
+                    location.reload();
+                }
+            })
+            .catch(err => notify('Error saving blog'));
+        }
+
+        function deleteBlog(id) {
+            if (confirm('Are you sure you want to delete this blog?')) {
+                fetch(`/delete blog/${id}`, { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    notify(data.message);
+                    location.reload();
+                })
+                .catch(err => notify('Error deleting blog'));
+            }
+        }
+
+        // Reset form when creating new
+        document.getElementById('saveBtn').addEventListener('click', () => {
+            if (!editingId) {
+                document.getElementById('blogTitle').value = '';
+                document.getElementById('blogExcerpt').value = '';
+                document.getElementById('blogContent').value = '';
+            }
+        });
+
+    
+    const hamburger = document.getElementById("hamburger");
+    const navLinks = document.getElementById("navLinks");
+
+    hamburger.addEventListener("click", () => {
+            navLinks.classList.toggle("active");
+            }
+        )
+    </script>
+</body>
+</html>

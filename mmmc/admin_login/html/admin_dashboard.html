@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artist Portfolio – Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('home.static', filename='index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('admin.static', filename='admin_dashboard.css') }}">
+</head>
+<body>
+
+    <nav>
+        <div class="logo">Artist Admin</div>
+    </nav>
+
+    <main class="admin-container">
+        <div class="head-wrapper">
+            <h1 class="admin-title">Admin Dashboard</h1>
+
+        <div class="notification">
+            <span></span>
+        </div>
+        </div>
+
+        <!-- Manage Blogs Link -->
+        <div class="admin-section">
+            <h3>Content Management</h3>
+            <a href="{{ url_for('admin.manage_blogs') }}" class="save-btn" style="text-decoration: none; display: inline-block; margin-right: 1rem;">Manage Blogs</a>
+            <a href="{{ url_for('admin.manage_services') }}" class="save-btn" style="text-decoration: none; display: inline-block; margin-right: 1rem;">Manage Services</a>
+            <a href="{{ url_for('admin.manage_messages') }}" class="save-btn" style="text-decoration: none; display: inline-block; margin-right: 1rem;">Manage Messages</a>
+            <a href="{{ url_for('admin.manage_about') }}" class="save-btn" style="text-decoration: none; display: inline-block; margin-right: 1rem;">Manage About</a>
+            <a href="{{ url_for('admin.manage_media') }}" class="save-btn" style="text-decoration: none; display: inline-block; margin-right: 1rem;">Manage Media</a>
+            <a href="{{ url_for('admin.manage_events') }}" class="save-btn" style="text-decoration: none; display: inline-block; margin-right: 1rem;">Manage Events</a>
+            <a href="{{ url_for('admin.manage_gallery') }}" class="save-btn" style="text-decoration: none; display: inline-block; margin-right: 1rem;">Manage Gallery</a>
+            <a href="{{ url_for('admin.manage_portfolio') }}" class="save-btn" style="text-decoration: none; display: inline-block;">Manage Portfolio</a>
+            
+        </div>
+
+        <div class="admin-section">
+            <h3>Edit Name</h3>
+            <input id="name" type="text" placeholder="Enter your portfolio display name">
+            <button id="name-btn" class="save-btn">Save Name</button>
+        </div>
+
+        <!-- Edit email -->
+        <div class="admin-section">
+            <h3>Update Email</h3>
+            <input id="old-email" type="text" placeholder="Enter current email">
+            <input id="new-email" type="text" placeholder="Enter new email">
+            <input id="password" type="text" placeholder="Enter your password">
+            <button id="email-btn" class="save-btn">Update Email</button>
+        </div>
+
+        <!-- Edit password -->
+        <div class="admin-section">
+            <h3>Update password</h3>
+            <input id="old-password" type="text" placeholder="Enter current password">
+            <input id="new-password" type="text" placeholder="Enter new password">
+            <input id="email" type="text" placeholder="Enter email">
+            <button id="password-btn" class="save-btn">Update password</button>
+        </div>
+
+    <div class="admin-section">
+        <h3>Google Analytics</h3>
+        <input
+            id="ga4-id"
+            type="text"
+            placeholder="Enter GA4 Measurement ID (e.g. G-ABCDEFG123)"
+            value="{{ client.ga4_measurement_id if client and client.ga4_measurement_id else '' }}"
+        >
+        
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem;">
+            <button id="ga4-save-btn" class="save-btn">Save / Update GA4</button>
+            
+            <a
+                id="ga4-view-link"
+                href="https://analytics.google.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="save-btn"
+                style="text-decoration: none; display: inline-block;"
+            >
+                View Analytics
+            </a>
+    </div>
+
+    <p id="ga4-message" style="margin-top: 1rem; font-size: 0.95rem;"></p>
+    </div>
+
+        <!-- Edit Skills Section -->
+        <div class="admin-section">
+            <h3>Edit Skills</h3>
+
+            <div class="skills-list">
+                {% for skill in skills %}
+                    <span class="skill-item">{{ skill.skill }} <button class="delete-skill-btn" onclick="deleteSkill('{{ skill.id }}')">×</button></span>
+                {% endfor %}
+                <!-- <span class="skill-item">Songwriting</span>
+                <span class="skill-item">Production</span> -->
+                <!-- dynamically added later -->
+            </div>
+
+             <div class="add-skill-box">
+                <input type="text" id="skill" placeholder="New skill">
+                <button class="skill-btn save-btn">Add Skill</button>
+            </div>
+        </div>
+
+        <!-- Edit Short About -->
+        <div class="admin-section">
+            <h3>Edit Short About</h3>
+            <textarea placeholder="Write a short introduction about yourself..." id="about"></textarea>
+            <button class="save-btn about-btn">Save About</button>
+        </div>
+
+        <!-- Change Profile Picture -->
+        <div class="admin-section">
+            <h3>Change Profile Picture</h3>
+            <input id="pp" type="file" accept="image/*">
+            <button class="save-btn upload-pp">Upload Picture</button>
+        </div>
+
+        <!-- Change Banner Image -->
+        <div class="admin-section">
+            <h3>Change Banner Background</h3>
+            <input id="bp" type="file" accept="image/*">
+            <button class="save-btn upload-bp">Upload Banner</button>
+        </div>
+
+    </main>
+
+    <script src="{{url_for('admin.static', filename='admin_dashboard.js') }}"></script>
+</body>
+</html>

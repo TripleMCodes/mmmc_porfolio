@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Gallery — Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('home.static', filename='index.css') }}">
+   <link rel="stylesheet" href="{{ url_for('admin.static', filename='manage_gallery.css') }}">
+</head>
+<body>
+
+    <nav>
+        <div class="logo">Artist Admin</div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="{{ url_for('admin.admin_dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('admin.manage_gallery') }}">Manage Gallery</a></li>
+        </ul>
+
+        <div class="h-menu" id="hamburger" aria-label="Toggle menu">
+            <span class="fa fa-bars">T</span>
+        </div>
+    </nav>
+
+    <main class="admin-container">
+        <h1 class="admin-title">Manage Gallery</h1>
+
+        <div class="notification" id="msgBox"></div>
+
+        <div class="gallery-section">
+            <h3>Current Images ({{ images|length }}/5)</h3>
+
+            <div class="gallery-grid">
+                {% for image in images %}
+                <div class="gallery-item">
+                    
+                    <img 
+                        src="{{ image.cloud_url }}" 
+                        alt="{{ image.title or 'Gallery image' }}"
+                        loading="lazy"
+                    >
+
+                    <div class="title">
+                        {{ image.title or 'Untitled' }}
+                    </div>
+
+                    <button 
+                        class="delete-btn" 
+                        onclick="deleteItem('{{ image.id }}')"
+                        aria-label="Delete image"
+                    >
+                        ×
+                    </button>
+
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        {% if images|length < 5 %}
+        <div class="upload-section">
+            <h3>Upload New Image</h3>
+            <input type="text" id="imageTitle" placeholder="Image Title (optional)">
+            <input type="file" id="imageFile" accept="image/*">
+            <button class="save-btn" onclick="uploadImage()">Upload Image</button>
+        </div>
+        {% else %}
+        <div class="upload-section">
+            <h3>Maximum Images Reached</h3>
+            <p>Delete at least one image to upload a new one.</p>
+        </div>
+        {% endif %}
+
+        <div class="gallery-section">
+            <h3>Current Videos</h3>
+            {% for video in videos %}
+            <div class="video-item">
+                <div class="title">{{ video.title or 'Untitled' }}</div>
+                <div class="url">{{ video.url }}</div>
+                <button class="delete-btn" onclick="deleteItem('{{ video.id }}')">×</button>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="upload-section">
+            <h3>Add YouTube Video</h3>
+            <input type="text" id="videoTitle" placeholder="Video Title (optional)">
+            <input type="text" id="videoUrl" placeholder="YouTube URL (e.g., https://www.youtube.com/watch?v=VIDEO_ID)">
+            <button class="save-btn" onclick="addVideo()">Add Video</button>
+        </div>
+    </main>
+
+    <script>
+        function notify(message) {
+            const msgBox = document.getElementById('msgBox');
+            msgBox.textContent = message;
+            msgBox.classList.add('on');
+            setTimeout(() => msgBox.classList.remove('on'), 5000);
+        }
+
+        function uploadImage() {
+            const fileInput = document.getElementById('imageFile');
+            const title = document.getElementById('imageTitle').value;
+
+            if (!fileInput.files[0]) {
+                notify('Please select an image file');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('image', fileInput.files[0]);
+            formData.append('title', title);
+
+            fetch('/upload gallery image', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                notify(data.message);
+                if (data.message.includes('uploaded')) {
+                    location.reload();
+                }
+            })
+            .catch(err => notify('Error uploading image'));
+        }
+
+        function addVideo() {
+            const url = document.getElementById('videoUrl').value.trim();
+            const title = document.getElementById('videoTitle').value;
+
+            if (!url) {
+                notify('Please enter a YouTube URL');
+                return;
+            }
+
+            fetch('/add gallery video', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ url: url, title: title })
+            })
+            .then(response => response.json())
+            .then(data => {
+                notify(data.message);
+                if (data.message.includes('added')) {
+                    document.getElementById('videoUrl').value = '';
+                    document.getElementById('videoTitle').value = '';
+                    location.reload();
+                }
+            })
+            .catch(err => notify('Error adding video'));
+        }
+
+        function deleteItem(id) {
+            if (confirm('Are you sure you want to delete this item?')) {
+                fetch(`/delete gallery item/${id}`, { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    notify(data.message);
+                    location.reload();
+                })
+                .catch(err => notify('Error deleting item'));
+            }
+        }
+    
+    const hamburger = document.getElementById("hamburger");
+    const navLinks = document.getElementById("navLinks");
+
+    hamburger.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+        }
+        )
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}
+  {{ blog.title }} — {{ name.title() }}
+{% endblock %}
+
+{% block page_css %}
+ <link rel="stylesheet" href="{{ url_for('blog_post.static', filename='blog-post.css') }}">
+{% endblock %}
+
+{% block header %}
+    <header class="post-hero">
+        <div style="margin-bottom: 1rem;">
+            <a href="{{ url_for('all_blogs.index') }}" style="color: #a855f7; text-decoration: none;">← Back to Blog</a>
+        </div>
+        <h1 class="post-title">{{ blog.title }}</h1>
+            <div class="post-meta">
+                <span class="post-date">{{ blog.date.strftime('%B %d, %Y') if blog.date else 'Recent Transmission' }}</span>
+                <span>•</span>
+                <span id="readingTime">{{ blog.reading_time or "" }} min read</span>
+            </div>
+        <p style="color:#9ca3af;max-width:900px;font-style: italic;">{{ blog.excerpt }}</p>
+    </header>
+{% endblock %}
+
+{% block content %}
+    <article class="post-content" id="postContent">
+        {{ html_content | safe }}
+    </article>
+{% endblock %}
+
+{% block page_js %}
+  <script src="{{ url_for('home.static', filename='script.js') }}"></script>
+    <script src="{{ url_for('blog_post.static', filename='blog-post.js') }}"></script>
+{% endblock %}

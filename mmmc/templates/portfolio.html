@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Portfolio — Work Samples — {{ name.title() }}
+{% endblock %}
+
+{% block page_css %}
+ <link rel="stylesheet" href="{{url_for('portfolio.static', filename='portfolio.css')}}">
+<link rel="stylesheet" href="{{ url_for('home.static', filename='index.css') }}">
+{% endblock %}
+
+{% block header %}
+    <header class="portfolio-hero">
+        <h1>Proof of Skill — Work Samples</h1>
+        <p class="portfolio-intro">Selected collaborations, ghostwriting excerpts, and experiments demonstrating phonetic design, flow engineering, and narrative craft.</p>
+    </header>
+{% endblock %}
+
+{% block content %}
+
+
+        <section class="portfolio-grid" id="portfolioGrid">
+
+            <div class="portfolio-grid">
+
+    {% for sample in samples %}
+        <div class="portfolio-card">
+
+            <div class="portfolio-card-content">
+
+                <h3 class="project-title">
+                    {{ sample.title }}
+                </h3>
+
+                <p class="project-description">
+                    {{ sample.description }}
+                </p>
+
+                <div class="project-actions">
+
+                    <a 
+                        href="{{ sample.project_url }}" 
+                        target="_blank"
+                        class="project-btn">
+                        View Project
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+    {% endfor %}
+
+</div>
+          
+            
+        </section>
+
+
+        <div class="pagination">
+
+    {% if pagination.has_prev %}
+        <a href="{{ url_for('portfolio.my_portfolio', page=pagination.prev_num) }}">
+            Previous
+        </a>
+    {% endif %}
+
+    {% for page_num in pagination.iter_pages() %}
+
+        {% if page_num %}
+
+            {% if page_num == pagination.page %}
+                <span class="active-page">
+                    {{ page_num }}
+                </span>
+            {% else %}
+                <a href="{{ url_for('portfolio.my_portfolio', page=page_num) }}">
+                    {{ page_num }}
+                </a>
+            {% endif %}
+
+        {% else %}
+            <span>...</span>
+        {% endif %}
+
+    {% endfor %}
+
+    {% if pagination.has_next %}
+        <a href="{{ url_for('portfolio.my_portfolio', page=pagination.next_num) }}">
+            Next
+        </a>
+    {% endif %}
+
+</div>
+{% endblock %}
+
+{% block page_js %}
+  <script src="{{ url_for('home.static', filename='script.js') }}"></script>
+ <script src="{{url_for('portfolio.static', filename='portfolio.js')}}"></script>
+{% endblock %}

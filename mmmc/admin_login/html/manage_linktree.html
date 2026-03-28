@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Linktree — Admin</title>
+    <link rel="stylesheet" href="{{ url_for('home.static', filename='index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('admin.static', filename='manage_linktree.css') }}">
+</head>
+<body>
+    <nav>
+        <div class="logo">Artist Admin</div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="{{ url_for('admin.admin_dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('admin.manage_linktree') }}">Manage Linktree</a></li>
+        </ul>
+
+        <div class="h-menu" id="hamburger" aria-label="Toggle menu">
+            <span class="fa fa-bars">t</span>
+        </div>
+    </nav>
+
+    <main class="admin-container">
+        <h1 style="text-align:center;color:#a855f7;margin-bottom:2rem">Manage Linktree</h1>
+
+        <div class="notification" id="notification"></div>
+
+        <!-- Linktree Config Section -->
+        <div class="section">
+            <h3>Linktree Configuration</h3>
+            <label style="color:#cbd5e1">Avatar (Single Character)</label>
+            <input type="text" id="configAvatar" placeholder="A" maxlength="1" style="margin-bottom:.8rem">
+            
+            <label style="color:#cbd5e1">Display Name</label>
+            <input type="text" id="configName" placeholder="Aura" style="margin-bottom:.8rem">
+            
+            <label style="color:#cbd5e1">Handle/Subtitle</label>
+            <input type="text" id="configHandle" placeholder="Musicain • Artist" style="margin-bottom:.8rem">
+            
+            <label style="color:#cbd5e1">Bio</label>
+            <textarea id="configBio" placeholder="Precision language engineering for artists, producers and brands — select a link below."></textarea>
+            
+            <label style="color:#cbd5e1">Email (for copy button)</label>
+            <input type="text" id="configEmail" placeholder="example@google.com" style="margin-bottom:.8rem">
+            
+            <button class="save-btn" onclick="saveLinktreeConfig()">Save Configuration</button>
+
+            <!-- Live Preview (dorment)-->
+            <!-- <div class="preview-section">
+                <h3 style="color:#a855f7;margin-bottom:1rem">Live Preview</h3>
+                <div class="preview-avatar" id="previewAvatar">X</div>
+                <div class="preview-name" id="previewName">XARYA</div>
+                <div class="preview-handle" id="previewHandle">Lyrical Linguist • Ghostwriter</div>
+                <div class="preview-bio" id="previewBio">Precision language engineering for artists, producers and brands — select a link below.</div>
+            </div>
+        </div> -->
+
+        <!-- Create New Link Section -->
+        <div class="section">
+            <h3>Add New Link</h3>
+            <label style="color:#cbd5e1">Link Text (with emoji)</label>
+            <input type="text" id="newText" placeholder="e.g., 🐦 Twitter / X" style="margin-bottom:.8rem">
+            
+            <label style="color:#cbd5e1">URL</label>
+            <input type="text" id="newUrl" placeholder="https://example.com" style="margin-bottom:.8rem">
+            
+            <div class="checkbox-group doment">
+                <input type="checkbox" id="newSecondary">
+                <label for="newSecondary">Secondary Style (lighter background)</label>
+            </div>
+            
+            <button class="save-btn" onclick="createLink()">Add Link</button>
+        </div>
+
+        <!-- Manage Links Section -->
+        <div class="section">
+            <h3>Manage Links</h3>
+            <div class="links-grid" id="linksList">
+                {% for link in links %}
+                    <div class="link-card" data-id="{{ link.id }}" data-order="{{ link.order }}">
+                        <div class="link-card-content">
+                            <div class="text">{{ link.text }}</div>
+                            <div class="url">{{ link.url }}</div>
+                            {% if link.is_secondary %}
+                                <div class="secondary-badge">Secondary</div>
+                            {% endif %}
+                        </div>
+                        <div class="link-card-actions">
+                            <button class="save-btn" onclick="editLinkModal('{{ link.id }}', '{{ link.text|escape }}', '{{ link.url|escape }}', {{ 'true' if link.is_secondary else 'false' }})">Edit</button>
+                            <button class="delete-btn" onclick="deleteLink('{{ link.id }}')">Delete</button>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            {% if not links %}
+                <p style="color:#a0aec0;text-align:center;padding:2rem">No links yet. Create one above.</p>
+            {% endif %}
+        </div>
+    </main>
+
+    <!-- Edit Link Modal -->
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeEditModal()">×</span>
+            <h2>Edit Link</h2>
+            <input type="hidden" id="editId">
+            <label style="color:#cbd5e1">Link Text (with emoji)</label>
+            <input type="text" id="editText" placeholder="e.g., 🐦 Twitter / X" style="margin-bottom:.8rem">
+            <label style="color:#cbd5e1">URL</label>
+            <input type="text" id="editUrl" placeholder="https://example.com" style="margin-bottom:.8rem">
+            <div class="checkbox-group doment">
+                <input type="checkbox" id="editSecondary">
+                <label for="editSecondary">Secondary Style</label>
+            </div>
+            <button class="save-btn" onclick="saveLinkEdit()" style="width:100%;margin-top:1rem">Save Link</button>
+        </div>
+    </div>
+    <script src="{{url_for('admin.static', filename='manage_linktree.js') }}"></script>
+</body>
+</html>

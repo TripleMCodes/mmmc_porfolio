@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage About — Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('home.static', filename='index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('admin.static', filename='manage_about.css') }}">
+</head>
+<body>
+
+    <nav>
+        <div class="logo">Artist Admin</div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="{{ url_for('admin.admin_dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('admin.manage_about') }}">Manage About</a></li>
+        </ul>
+
+        <div class="h-menu" id="hamburger" aria-label="Toggle menu">
+            <span class="fa fa-bars"></span>
+        </div>
+    </nav>
+
+    <main class="admin-container">
+        <h1 class="admin-title">Manage About Page</h1>
+
+        <div class="notification" id="msgBox"></div>
+
+    <section class="section-editor" id="hero-editor">
+        <div>
+            <h3>Hero Section</h3>
+            <p class="muted">Controls the title + brief shown at the top of the About page.</p>
+        </div>
+
+        <input type="hidden" id="hero-id" value="{{ hero.id if hero else '' }}">
+
+        <label class="field">
+            <span class="field-label">Hero Title</span>
+            <input
+            type="text"
+            id="hero-title"
+            placeholder="About Aura"
+            value="{{ hero.hero_title if hero else 'About Xarya' }}"
+            >
+        </label>
+
+        <label class="field">
+            <span class="field-label">Brief Description</span>
+            <textarea
+            id="hero-brief"
+            placeholder="Write a short hero intro..."
+            >{{ hero.hero_brief if hero else 'Lyrical linguist, ghostwriter, and sound engineer of language. I craft verses that transcend ordinary communication.' }}</textarea>
+        </label>
+
+        <div class="editor-actions">
+            <button type="button" class="save-btn" id="btn-save-hero">Save Hero</button>
+            <span class="muted" id="hero-status" aria-live="polite"></span>
+        </div>
+    </section>
+
+        {% set f = foundation[0] if foundation else None %}
+
+        <div class="section-editor" id="foundation-editor">
+        <h3>Foundation and Craft Section</h3>
+
+        <input type="hidden" id="foundation-id" value="{{ f.id if f else '' }}">
+
+        <label>Paragraphs:</label>
+        <div id="foundation-paragraphs">
+            {% set default_paragraphs = [
+            "I exist in the spaces between words—where meaning shifts, where rhythm becomes reality. My journey began with a deep fascination with how language can engineer emotion, control perception, and reshape consciousness.",
+            "After years of studying linguistics, phonetics, and narrative psychology, I realized my calling: to create language that doesn't just communicate, but transforms."
+            ] %}
+
+            {% if f and f.paragraphs %}
+            {% for para in f.paragraphs.split('\n\n') %}
+                <div class="foundation-row">
+                <textarea class="foundation-para" placeholder="Paragraph">{{ para }}</textarea>
+                <button type="button" class="save-btn" data-action="remove-foundation-para">Remove</button>
+                </div>
+            {% endfor %}
+            {% else %}
+            {% for para in default_paragraphs %}
+                <div class="foundation-row">
+                <textarea class="foundation-para" placeholder="Paragraph">{{ para }}</textarea>
+                </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+
+        <div style="display:flex; gap:10px; margin-top:10px;">
+            
+            <button type="button" class="save-btn" id="btn-save-foundation">Save Foundation</button>
+            <span id="foundation-status" style="opacity:0.75;"></span>
+        </div>
+        </div>
+
+                <div class="section-editor" id="journey-editor">
+                <h3>Journey Section</h3>
+
+                <label>Timeline Items:</label>
+
+                <div id="journey-items">
+                    {% if journey_items and journey_items|length > 0 %}
+                    {% for item in journey_items %}
+                        <div class="journey-item" data-journey-id="{{ item.id }}">
+                        <input type="number" class="year" placeholder="Year" value="{{ item.year }}">
+                        <textarea class="desc" placeholder="Description">{{ item.desc }}</textarea>
+
+                        <div class="row-actions">
+                            <button type="button" class="save-btn js-update-journey">Update</button>
+                            <button type="button" class="save-btn danger js-delete-journey">Delete</button>
+                        </div>
+                        </div>
+                    {% endfor %}
+                    {% else %}
+                    <div class="journey-item" data-draft="1">
+                        <input type="number" class="year" placeholder="Year" value="2015">
+                        <textarea class="desc" placeholder="Description">Started writing and performing original material; began studying linguistics and phonetics in depth.</textarea>
+
+                        <div class="row-actions">
+                        <button type="button" class="save-btn js-create-journey">Save</button>
+                        <button type="button" class="save-btn ghost js-cancel-draft">Cancel</button>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="row-actions" style="margin-top: 10px;">
+                    <button type="button" class="save-btn" id="btn-add-journey">Add Timeline Item</button>
+                    <span id="journey-status" style="opacity:0.75;"></span>
+                </div>
+                </div>
+
+
+        <section class="section-editor" id="expertise-editor">
+            <div>
+                <h3>Expertise</h3>
+                <p class="muted">Add / remove your expertise cards.</p>
+            </div>
+
+            <div class="editor-actions">
+                <button type="button" class="save-btn" id="btn-add-expertise">
+                + Add card
+                </button>
+            </div>
+
+            <div id="expertise-cards" class="cards-grid">
+                {% for exp in expertise %}
+                <article class="expertise-card" data-exp-id="{{ exp.exp_id }}">
+                    <div class="field-row">
+                    <label class="field">
+                        <span class="field-label">Icon</span>
+                        <input type="text" class="icon" value="{{ exp.icon }}" placeholder="✨" maxlength="8">
+                    </label>
+
+                    <label class="field">
+                        <span class="field-label">Title</span>
+                        <input type="text" class="title" value="{{ exp.expertise }}" placeholder="e.g. Mixing & Mastering">
+                    </label>
+                    </div>
+
+                    <label class="field">
+                    <span class="field-label">Description</span>
+                    <textarea class="desc" placeholder="Describe this expertise...">{{ exp.desc }}</textarea>
+                    </label>
+
+                    <div class="card-actions">
+                    <button type="button" class="save-btn danger js-delete-expertise">
+                        Delete
+                    </button>
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="section-editor" id="testimonials-editor">
+            <div class="editor-header">
+                <h3>Testimonials</h3>
+                <p class="muted">Add, remove, and manage testimonials.</p>
+            </div>
+
+            <div class="editor-actions">
+                <button type="button" class="save-btn" id="btn-add-testimonial">
+                + Add testimonial
+                </button>
+            </div>
+
+            <div id="testimonials-slides" class="cards-grid">
+                {% for t in testimonials %}
+                <article class="testimonial-card" data-t-id="{{ t.t_id }}">
+                    <label class="field">
+                    <span class="field-label">Testimonial</span>
+                    <textarea class="testimonial" placeholder="Quote...">{{ t.testimonial }}</textarea>
+                    </label>
+
+                    <div class="field-row">
+                    <label class="field">
+                        <span class="field-label">Artist name</span>
+                        <input type="text" class="artist-name" value="{{ t.artist_name }}" placeholder="Artist A">
+                    </label>
+
+                    <label class="field">
+                        <span class="field-label">Social link</span>
+                        <input type="text" class="artist-social" value="{{ t.artist_social }}" placeholder="https://instagram.com/...">
+                    </label>
+                    </div>
+
+                    <div class="card-actions">
+                    <button type="button" class="save-btn danger js-delete-testimonial">
+                        Delete
+                    </button>
+                    </div>
+                </article>
+                {% endfor %}
+
+                {% if testimonials|length == 0 %}
+                <p style="text-align:center;opacity:0.7;">No testimonials yet.</p>
+                {% endif %}
+            </div>
+        </section>
+
+
+
+    
+    </main>
+
+    <script src="{{url_for('admin.static', filename='manage_about.js') }}"></script>
+</body>
+</html>

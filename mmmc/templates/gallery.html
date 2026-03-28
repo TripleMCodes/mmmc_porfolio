@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Gallery — {{ name.title() }}
+{% endblock %}
+
+{% block page_css %}
+  <link rel="stylesheet" href="{{url_for('gallery.static', filename='gallery.css')}}">
+{% endblock %}
+
+{% block header %}
+  <header class="gallery-hero">
+    <h1>Gallery</h1>
+    <p>Visual transmissions from the world of {{ name.title() }}.</p>
+  </header>
+{% endblock %}
+
+{% block content %}
+ <section>
+      <h2 class="section-header">Filter Content</h2>
+      <div class="filters" id="filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="images">Images</button>
+        <button class="filter-btn" data-filter="videos">Videos</button>
+      </div>
+
+      <!-- <div class="grid" id="galleryGrid">
+        {% for item in gallery_items %}
+            {% if item.type == 'image' %}
+            <div class="thumb" data-type="images" data-title="{{ item.title }}" data-src="{{ url_for('gallery.static', filename='img/' + item.url) }}">
+              <img src="{{ url_for('gallery.static', filename='img/' + item.url) }}" alt="{{ item.title }}">
+              <div class="tag">Image</div>
+            </div>
+            {% elif item.type == 'video' %}
+            <div class="thumb" data-type="videos" data-title="{{ item.title }}" data-video="{{ item.video_id }}">
+              <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;padding:10px;text-align:center">
+                {{ item.title }}
+              </div>
+              <div class="play">▶</div>
+              <div class="tag">Video</div>
+            </div>
+            {% endif %}
+        {% else %}
+            <p style="color:#9ca3af; text-align:center; grid-column: 1/-1;">The gallery is currently empty.</p>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section style="margin-top:1.5rem">
+      <h2 class="section-header">Featured Videos</h2>
+      <div class="videos-grid">
+        {% for item in gallery_items if item.type == 'video' %}
+        <div class="video-thumb">
+          <iframe src="https://www.youtube.com/embed/{{ item.video_id }}" title="{{ item.title }}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        {% endfor %}
+      </div>
+    </section> -->
+
+    <div class="grid" id="galleryGrid">
+
+    {% for image in images %}
+    <div 
+        class="thumb"
+        data-type="images"
+        data-title="{{ image.title }}"
+        data-src="{{ image.cloud_url }}"
+    >
+        <img 
+            src="{{ image.cloud_url }}"
+            alt="{{ image.title or 'Gallery image' }}"
+            loading="lazy"
+        >
+
+        <div class="tag">Image</div>
+    </div>
+    {% endfor %}
+
+    {% for video in videos %}
+    <div 
+        class="thumb"
+        data-type="videos"
+        data-title="{{ video.title }}"
+        data-video="{{ video.video_id }}"
+    >
+        <div class="video-overlay">
+            {{ video.title }}
+        </div>
+
+        <div class="play">▶</div>
+        <div class="tag">Video</div>
+    </div>
+    {% endfor %}
+
+    {% if not images and not videos %}
+    <p class="empty-gallery">
+        The gallery is currently empty.
+    </p>
+    {% endif %}
+
+</div>
+
+
+ <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lb-inner" role="dialog" aria-modal="true">
+      <div class="lb-media" id="lbMedia">
+        <button class="lb-close" id="lbClose">Close ✕</button>
+        <div class="lb-nav">
+          <button class="nav-btn" id="prevBtn">◀</button>
+          <button class="nav-btn" id="nextBtn">▶</button>
+        </div>
+      </div>
+      <aside class="lb-info" id="lbInfo">
+        <div class="lb-title" id="lbTitle"></div>
+        <div class="lb-meta" id="lbMeta"></div>
+        <a href="#" id="lbExternal" class="action-link" style="margin-top:8px">Open Source</a>
+      </aside>
+    </div>
+  </div> 
+{% endblock %}
+
+
+{% block page_js %}
+  <!-- <script src="{{ url_for('home.static', filename='script.js') }}"></script> -->
+  <script src="{{ url_for('gallery.static', filename='gallery.js') }}"></script>
+{% endblock %}

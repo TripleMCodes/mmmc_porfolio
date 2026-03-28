@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Enter Verification Code</title>
+    <link rel="stylesheet" href="{{ url_for('home.static', filename='styles.css') }}">
+</head>
+
+<body>
+
+    <!-- Background Particles -->
+    <!-- <div class="particles" > -->
+        <!-- {% for i in range(35) %}
+            <div class="particle" style="
+                width: {{ 5 + loop.index }}px;
+                height: {{ 5 + loop.index }}px;
+                top: {{ (loop.index * 30) % 500 }}px;
+                left: {{ (loop.index * 57) % 1200 }}px;
+                animation-duration: {{ 10 + (loop.index % 10) }}s;">
+            </div>
+        {% endfor %} -->
+    <!-- </div> -->
+    
+    <div class="particles" id="particles"></div>
+
+    <!-- Main container -->
+    <main style="max-width: 500px; margin: 6rem auto;">
+
+        <div class="about-section" style="text-align: center; padding: 3rem;">
+            <h2 style="margin-bottom: 1rem;">Two-Factor Authentication</h2>
+            <p style="color: #c4b5fd; margin-bottom: 2rem;">
+                Enter the 6-digit verification code from your authenticator app.
+            </p>
+
+            <!-- Flash messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div style="margin-bottom: 1rem;">
+                        {% for category, message in messages %}
+                            <div style="
+                                background: rgba(168, 85, 247, 0.15);
+                                padding: 0.75rem 1rem;
+                                border-radius: 8px;
+                                border: 1px solid rgba(168, 85, 247, 0.4);
+                                color: #e0e0e0;
+                                margin-bottom: 0.5rem;">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            <!-- TOTP Form -->
+            <form action="{{ url_for('admin.verify_totp') }}" method="POST"
+                  style="display: flex; flex-direction: column; gap: 1.5rem;">
+
+                <input 
+                    type="text"
+                    name="code"
+                    placeholder="6-digit code"
+                    required
+                    maxlength="6"
+                    style="
+                        padding: 1rem;
+                        border-radius: 10px;
+                        border: 2px solid rgba(168, 85, 247, 0.4);
+                        background: rgba(30, 41, 59, 0.5);
+                        color: #e0e0e0;
+                        font-size: 1.2rem;
+                        text-align: center;
+                        letter-spacing: 5px;
+                        outline: none;
+                        transition: 0.3s;
+                    "
+                    onfocus="this.style.borderColor='#a855f7';"
+                    onblur="this.style.borderColor='rgba(168, 85, 247, 0.4)';"
+                >
+
+                <button 
+                    type="submit"
+                    class="cta-button"
+                    style="width: 100%; border-radius: 12px;">
+                    Verify Code
+                </button>
+            </form>
+
+        </div>
+
+    </main>
+
+</body>
+</html>

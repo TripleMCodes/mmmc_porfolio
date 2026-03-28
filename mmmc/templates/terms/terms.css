@@ -1,0 +1,140 @@
+/* =========================
+   TERMS — HOME THEME
+   White/Cream + Gold + Soft Blue Aura
+========================= */
+
+:root{
+  --gold: #B78628;
+  --ink: #141414;
+  --muted: rgba(20,20,20,0.68);
+  --paper: #ffffff;
+  --cream: #f6f0e3;
+
+  --aura: rgba(132, 201, 240, 0.22);
+  --line: rgba(0,0,0,0.06);
+  --shadow: rgba(0,0,0,0.10);
+}
+
+/* HERO */
+.terms-hero{
+  padding: 5rem 5% 2rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  background:
+    radial-gradient(circle at 50% 30%, rgba(183,134,40,0.14), transparent 52%),
+    radial-gradient(circle at 50% 65%, rgba(132,201,240,0.12), transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,0.96), rgba(246,240,227,0.55));
+  border-bottom: 1px solid var(--line);
+  border-radius: 26px;
+  margin-top: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* soft aura orb */
+.terms-hero::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:62%;
+  transform: translate(-50%, -50%);
+  width: min(520px, 86vw);
+  aspect-ratio: 1/1;
+  border-radius: 999px;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,0.65), transparent 56%),
+    radial-gradient(circle at 50% 50%, var(--aura), transparent 68%);
+  opacity: 0.9;
+}
+
+.terms-hero h1{
+  color: var(--ink);
+  font-size: clamp(1.7rem, 3vw, 2.6rem);
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* gold divider under title */
+.terms-hero h1::after{
+  content:"";
+  display:block;
+  width: 92px;
+  height: 2px;
+  margin: 1rem auto 0;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.9;
+}
+
+.terms-intro{
+  color: rgba(20,20,20,0.68);
+  max-width: 900px;
+  margin: 0.85rem auto 0;
+  line-height: 1.85;
+}
+
+/* MAIN */
+.terms-main{
+  max-width: 900px;
+  margin: 2rem auto 3.5rem;
+  padding: 0 5%;
+}
+
+/* SECTIONS (parchment glass cards) */
+.terms-section{
+  background: rgba(255,255,255,0.82);
+  padding: 1.25rem 1.3rem;
+  border-radius: 22px;
+  margin-bottom: 1rem;
+
+  border: 1px solid rgba(183,134,40,0.18);
+  box-shadow: 0 14px 50px rgba(0,0,0,0.08);
+  backdrop-filter: blur(12px);
+  position: relative;
+  overflow: hidden;
+}
+
+/* subtle gold sheen */
+.terms-section::before{
+  content:"";
+  position:absolute;
+  inset:-30%;
+  background: radial-gradient(circle at 20% 20%, rgba(183,134,40,0.10), transparent 55%);
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+.terms-section h2{
+  color: var(--ink);
+  margin-bottom: 0.6rem;
+  font-size: 1rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.terms-section p,
+.terms-section li{
+  color: rgba(20,20,20,0.72);
+  line-height: 1.85;
+}
+
+.terms-section ul{
+  margin-left: 1.1rem;
+  margin-top: 0.7rem;
+}
+
+.terms-section li::marker{
+  color: var(--gold);
+}
+
+/* Optional: tighten on small screens */
+@media (max-width: 480px){
+  .terms-hero{ padding: 3.4rem 1.25rem 1.6rem; border-radius: 22px; }
+  .terms-section{ padding: 1.05rem 1.05rem; border-radius: 18px; }
+}

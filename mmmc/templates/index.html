@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Home - {{ name }}
+{% endblock %}
+
+{% block page_css %}
+  <link rel="stylesheet" href="{{ url_for('home.static', filename='index.css') }}">
+  <style>
+
+   
+
+  </style>
+{% endblock %}
+
+
+{% block header %}
+ <header class="hero">
+         {% if banner_picture_url %}
+           
+            <img  src="{{ banner_picture_url }}" class="banner-overlay" alt="banner picture">
+        {% endif %}
+
+
+        <div class="hero-inner">
+            <div class="profile-container">
+                <div class="profile-frame">
+                    {% if profile_picture_url %}
+                        <img src="{{ profile_picture_url }}" class="profile-pic" alt="profile picture">
+                    {% else %}
+                        <div class="profile-pic">MMMC</div>
+                    {% endif %}
+                </div>
+
+               <h1 class="name-switch profile-name"
+                    data-default="MMMC"
+                    data-hover="CONNOR">
+                </h1>
+
+                <ul class="profile-title">
+                    {% for skill in skills %}
+                        <li>• {{ skill.title() }}</li>
+                    {% endfor %}
+                </ul>
+
+                <div class="hero-actions">
+                    <a href="{{ url_for('media.media_route') }}" class="primary-link">Enter the Work</a>
+                    <a href="{{ url_for('contact.contact_route') }}" class="secondary-link">Contact</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+{% endblock %}
+
+{% block content %}
+  <section class="about-section" id="about">
+            <div class="section-head">
+                <h2>About {{ name.title() or "" }}</h2>
+                <div class="section-divider" aria-hidden="true"></div>
+            </div>
+            <p>{{ short_about }}</p>
+        </section>
+
+       
+        <section class="latest music">
+            <div class="section-head">
+                <h2 class="section-title">Latest Releases</h2>
+                <div class="section-divider" aria-hidden="true"></div>
+            </div>
+
+            <div class="music-grid">
+                {# Latest EP #}
+                {% if eps and eps|length > 0 %}
+                {% set last_ep = eps[-1] %}
+                <div class="music-card">
+                    <div class="album-cover">
+                        <img src="{{ url_for('media.static', filename='img/icons8-disc-60.png') }}" alt="disc icon">
+                    </div>
+                    <div class="card-content">
+                        <div class="music-title">EP: {{ last_ep.title }}</div>
+                        <div class="music-artist">By: {{ name.title() }}</div>
+                        <div class="card-actions">
+                            {% if last_ep.stream_url %}<a href="{{ last_ep.stream_url }}" class="action-link" target="_blank">Stream</a>{% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                {# Latest Single #}
+                {% if singles and singles|length > 0 %}
+                {% set last_single = singles[-1] %}
+                <div class="music-card">
+                    <div class="album-cover">
+                        <img src="{{ url_for('media.static', filename='img/icons8-disc-50.png') }}" alt="disc icon">
+                    </div>
+                    <div class="card-content">
+                        <div class="music-title">Single: {{ last_single.title }}</div>
+                        <div class="music-artist">By: {{ last_single.artist_name }}</div>
+                        <div class="card-actions">
+                            <a href="{{ last_single.link }}" class="action-link" target="_blank">Stream</a>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                {# Latest Album #}
+                {% if albums and albums|length > 0 %}
+                {% set last_album = albums[-1] %}
+                <div class="music-card">
+                    <div class="album-cover">
+                        <img src="{{ url_for('media.static', filename='img/icons8-disc-60 (1).png') }}" alt="disc icon">
+                    </div>
+                    <div class="card-content">
+                        <div class="music-title">Album: {{ last_album.title }}</div>
+                        <div class="music-artist">By: {{ last_album.artist_name }}</div>
+                        <div class="card-actions">
+                            <a href="{{ last_album.link }}" class="action-link" target="_blank">Stream</a>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </section>
+
+        <section class="posts-section" id="blog">
+            <div class="section-head">
+                <h2 class="section-title">Latest Transmissions</h2>
+                <div class="section-divider" aria-hidden="true"></div>
+            </div>
+
+            <div class="posts-grid">
+                {% for blog in blogs %}
+                    <article class="post-card">
+                        <div class="post-content">
+                            <p class="post-date">{{ blog.date }}</p>
+                            <h3 class="post-title">{{ blog.title }}</h3>
+                            <p class="post-excerpt">{{ blog.excerpt }}</p>
+                            <a href="{{ url_for('blog_post.blog_post', blog_id=blog.id) }}" class="read-more">Read More →</a>
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="services-section" id="services">
+            <div class="services-container">
+                
+                <h2 class="services-title">My Services</h2>
+
+                <p class="services-subtitle">
+                    Explore the creative and technical services I offer — from music and storytelling to development and digital experiences.
+                </p>
+
+                <a href="{{ url_for('service.service_route') }}" class="services-btn">
+                    View Services
+                </a>
+
+            </div>
+        </section>
+
+        <section class="cta-section" style="max-width:1000px;margin:3rem auto;padding:2rem 5%">
+            <h2>Get in Touch for Collaborations</h2>
+            <p style="color:#d1d5db;margin-bottom:1.5rem">Interested in featuring, remixing, or collaborating? Let's connect.</p>
+            <a href="{{url_for('contact.contact_route')}}" class="cta-button">Start a Project</a>
+        </section>
+{% endblock %}
+
+{% block page_js %}
+ <script src="{{ url_for('home.static', filename='script.js') }}"></script>
+{% endblock %}

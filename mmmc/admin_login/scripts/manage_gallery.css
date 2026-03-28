@@ -1,0 +1,373 @@
+.admin-container {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background: rgba(30, 41, 59, 0.6);
+    border-radius: 20px;
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+.admin-title {
+    text-align: center;
+    font-size: 2.3rem;
+    margin-bottom: 2rem;
+    background: linear-gradient(135deg, #a855f7 0%, #c084fc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.gallery-section {
+    background: rgba(255,255,255,0.05);
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(168,85,247,0.3);
+}
+
+.gallery-section h3 {
+    color: #a855f7;
+    margin-bottom: 1rem;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.gallery-item {
+    background: rgba(0,0,0,0.3);
+    padding: 1rem;
+    border-radius: 8px;
+    position: relative;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.gallery-item .title {
+    margin-top: 0.5rem;
+    color: #c4b5fd;
+    font-size: 0.9rem;
+}
+
+.delete-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: #dc2626;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.upload-section {
+    background: rgba(255,255,255,0.05);
+    padding: 2rem;
+    border-radius: 10px;
+    border: 1px solid rgba(168,85,247,0.3);
+}
+
+input[type="text"], input[type="file"] {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 10px;
+    border: 1px solid rgba(168,85,247,0.3);
+    background: rgba(15,23,42,0.6);
+    color: #e0e0e0;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    outline: none;
+}
+
+.save-btn {
+    padding: 0.8rem 2rem;
+    background: linear-gradient(135deg, #a855f7 0%, #8b5cf6 100%);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.save-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(168,85,247,0.5);
+}
+
+.notification {
+    display: none;
+    color: #a855f7;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.notification.on {
+    display: block;
+}
+
+.video-item {
+    background: rgba(0,0,0,0.3);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.video-item .url {
+    color: #c4b5fd;
+    word-break: break-all;
+}
+
+ .h-menu {
+  display: none;
+  cursor: pointer;
+  font-size: 1.4rem;
+}
+
+
+@media (max-width: 360px) {
+    .admin-container {
+        margin: 0.8rem;
+        padding: 1.2rem;
+        border-radius: 14px;
+    }
+
+    .admin-title {
+        font-size: 1.5rem;
+        margin-bottom: 1.4rem;
+    }
+
+    .gallery-section,
+    .upload-section {
+        padding: 1.2rem;
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+
+    .gallery-item {
+        padding: 0.8rem;
+    }
+
+    .gallery-item img {
+        height: 140px;
+    }
+
+    .gallery-item .title {
+        font-size: 0.8rem;
+    }
+
+    input[type="text"],
+    input[type="file"] {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
+
+    .save-btn {
+        width: 100%;
+        padding: 0.8rem;
+        font-size: 0.95rem;
+    }
+
+    .delete-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 1.1rem;
+    }
+
+    .video-item {
+        padding: 0.8rem;
+    }
+
+    .video-item .url {
+        font-size: 0.75rem;
+    }
+
+    .save-btn:hover {
+        transform: none;
+        box-shadow: none;
+    }
+
+    .h-menu {
+        display: block;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        gap: 1.5rem;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: #0f0f0f;
+        padding: 2rem;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 640px) {
+    .admin-container {
+        margin: 1.2rem;
+        padding: 1.5rem;
+        border-radius: 16px;
+    }
+
+    .admin-title {
+        font-size: 1.8rem;
+        margin-bottom: 1.8rem;
+    }
+
+    .gallery-section,
+    .upload-section {
+        padding: 1.4rem;
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-item img {
+        height: 180px;
+    }
+
+    input[type="text"],
+    input[type="file"] {
+        padding: 0.9rem;
+        font-size: 0.95rem;
+    }
+
+    .save-btn {
+        width: 100%;
+        padding: 0.9rem;
+        font-size: 1rem;
+    }
+
+    .delete-btn {
+        width: 34px;
+        height: 34px;
+        font-size: 1.2rem;
+    }
+
+
+     .h-menu {
+        display: block;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        gap: 1.5rem;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: #0f0f0f;
+        padding: 2rem;
+        width: 100%;
+        text-align: center;
+    }
+
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+    .admin-container {
+        margin: 2rem;
+        padding: 2rem;
+    }
+
+    .admin-title {
+        font-size: 2rem;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .gallery-item img {
+        height: 160px;
+    }
+
+    .save-btn {
+        width: 100%;
+    }
+
+    .h-menu {
+        display: block;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        gap: 1.5rem;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: #0f0f0f;
+        padding: 2rem;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .admin-container {
+        max-width: 960px;
+        padding: 2.2rem;
+    }
+
+    .admin-title {
+        font-size: 2.2rem;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .gallery-item img {
+        height: 150px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .admin-container {
+        max-width: 1320px;
+    }
+
+    .gallery-grid {
+        gap: 1.6rem;
+    }
+
+    .admin-title {
+        font-size: 2.6rem;
+    }
+}
+
+
+
+

@@ -1,0 +1,459 @@
+/* =========================
+   CONTACT PAGE — NEON DARK PURPLE / FUTURISTIC
+========================= */
+
+:root{
+  --bg-0: #05010b;
+  --bg-1: #0b0317;
+  --bg-2: #140426;
+  --bg-3: #1d0735;
+
+  --neon: #c400ff;
+  --neon-2: #8f3dff;
+  --neon-3: #f05dff;
+
+  --neon-soft: rgba(196, 0, 255, 0.16);
+  --neon-soft-2: rgba(143, 61, 255, 0.12);
+  --neon-line: rgba(214, 115, 255, 0.18);
+  --neon-glow: rgba(196, 0, 255, 0.38);
+
+  --white: #f8f1ff;
+  --text: #eadbff;
+  --text-soft: rgba(234, 219, 255, 0.74);
+  --text-faint: rgba(234, 219, 255, 0.52);
+
+  --glass: rgba(20, 8, 38, 0.64);
+  --glass-strong: rgba(25, 10, 46, 0.78);
+
+  --line: rgba(214, 115, 255, 0.12);
+
+  --radius-xl: 28px;
+  --radius-lg: 22px;
+  --radius-md: 18px;
+  --radius-pill: 999px;
+
+  --blur: 14px;
+
+  --shadow-md: 0 14px 44px rgba(0,0,0,0.18);
+  --shadow-lg: 0 18px 64px rgba(0,0,0,0.24);
+  --shadow-xl: 0 24px 78px rgba(0,0,0,0.30);
+
+  --ease: 0.2s ease;
+}
+
+/* =========================
+   HERO
+========================= */
+.contact-hero{
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  padding: 4.6rem 1.25rem 3rem;
+  border-bottom: 1px solid var(--line);
+  background:
+    radial-gradient(circle at 50% 35%, rgba(196, 0, 255, 0.14), transparent 28%),
+    radial-gradient(circle at 50% 55%, rgba(143, 61, 255, 0.12), transparent 42%),
+    linear-gradient(180deg, rgba(20,4,38,0.82), rgba(7,2,14,0.94));
+}
+
+.contact-hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.02) 28%, transparent 54%),
+    radial-gradient(circle at 20% 25%, rgba(240,93,255,0.08), transparent 22%),
+    radial-gradient(circle at 80% 20%, rgba(143,61,255,0.08), transparent 18%);
+}
+
+.contact-hero::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:56%;
+  transform: translate(-50%, -50%);
+  width: min(620px, 88vw);
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,0.14), transparent 18%),
+    radial-gradient(circle at 50% 50%, rgba(240,93,255,0.10), transparent 34%),
+    radial-gradient(circle at 50% 50%, rgba(196,0,255,0.18), transparent 56%),
+    radial-gradient(circle at 50% 50%, rgba(143,61,255,0.10), transparent 74%);
+  box-shadow:
+    0 0 80px rgba(196,0,255,0.14),
+    0 0 150px rgba(143,61,255,0.08);
+  animation: contactHeroPulse 6s ease-in-out infinite;
+}
+
+.contact-hero > *{
+  position: relative;
+  z-index: 1;
+}
+
+.contact-hero h1{
+  font-size: clamp(2rem, 4vw, 3rem);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--white);
+  text-shadow:
+    0 0 12px rgba(196,0,255,0.18),
+    0 0 30px rgba(196,0,255,0.10);
+  margin-bottom: 0.85rem;
+}
+
+.contact-hero h1::after{
+  content:"";
+  display:block;
+  width: 96px;
+  height: 2px;
+  margin: 1rem auto 0;
+  background: linear-gradient(90deg, transparent, var(--neon), transparent);
+  box-shadow: 0 0 12px var(--neon-glow);
+}
+
+.contact-hero p{
+  max-width: 760px;
+  margin: 0 auto;
+  color: var(--text-soft);
+  font-size: 1.02rem;
+  line-height: 1.85;
+}
+
+@keyframes contactHeroPulse{
+  0%,100%{
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.92;
+  }
+  50%{
+    transform: translate(-50%, -50%) scale(1.05);
+    opacity: 1;
+  }
+}
+
+/* =========================
+   MAIN LAYOUT
+========================= */
+.contact-main{
+  position: relative;
+  max-width: 1100px;
+  margin: 2.6rem auto 4rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(280px, 0.9fr);
+  gap: 1.4rem;
+  align-items: start;
+}
+
+/* =========================
+   FORM + SIDEBAR GLASS PANELS
+========================= */
+.hire-form,
+.sidebar{
+  position: relative;
+  overflow: hidden;
+  padding: 1.8rem;
+  border-radius: var(--radius-xl);
+
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.02)),
+    rgba(18, 7, 32, 0.70);
+  border: 1px solid var(--line);
+  box-shadow:
+    var(--shadow-lg),
+    inset 0 0 0 1px rgba(255,255,255,0.02);
+  backdrop-filter: blur(var(--blur));
+  -webkit-backdrop-filter: blur(var(--blur));
+}
+
+.hire-form::before,
+.sidebar::before{
+  content:"";
+  position:absolute;
+  inset:-30%;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(196,0,255,0.12), transparent 24%),
+    radial-gradient(circle at 82% 72%, rgba(143,61,255,0.10), transparent 28%);
+  opacity: 0.88;
+  pointer-events:none;
+}
+
+.hire-form > *,
+.sidebar > *{
+  position: relative;
+  z-index: 1;
+}
+
+/* =========================
+   FORM GRID
+========================= */
+.form-row{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.field{
+  min-width: 0;
+}
+
+/* =========================
+   LABELS
+========================= */
+label{
+  display: block;
+  margin-bottom: 0.45rem;
+  color: var(--white);
+  font-size: 0.84rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+/* =========================
+   INPUTS / TEXTAREA
+========================= */
+input[type="text"],
+input[type="email"],
+textarea{
+  width: 100%;
+  min-width: 0;
+  padding: 0.95rem 1rem;
+  border-radius: 18px;
+  border: 1px solid rgba(214,115,255,0.16);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02)),
+    rgba(12, 5, 24, 0.76);
+  color: var(--white);
+  outline: none;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.02),
+    0 10px 24px rgba(0,0,0,0.14);
+  transition:
+    border-color var(--ease),
+    box-shadow var(--ease),
+    background var(--ease),
+    transform var(--ease);
+}
+
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+textarea::placeholder{
+  color: var(--text-faint);
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus{
+  border-color: rgba(214,115,255,0.36);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.055), rgba(255,255,255,0.024)),
+    rgba(16, 6, 30, 0.88);
+  box-shadow:
+    0 0 0 3px rgba(196,0,255,0.10),
+    0 16px 38px rgba(0,0,0,0.22),
+    0 0 24px rgba(196,0,255,0.08);
+}
+
+textarea{
+  min-height: 170px;
+  resize: vertical;
+  line-height: 1.7;
+}
+
+/* =========================
+   CHECKBOX / SUBMIT AREA
+========================= */
+.submit-row{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  margin-top: 0.75rem;
+}
+
+.submit-row label{
+  margin-bottom: 0.35rem;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-soft) !important;
+}
+
+input[type="checkbox"]{
+  accent-color: var(--neon);
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.note{
+  color: var(--text-faint);
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+/* =========================
+   CTA BUTTON
+========================= */
+.cta-button{
+  display: inline-block;
+  border: none;
+  cursor: pointer;
+  padding: 0.95rem 1.5rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.82rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #fff;
+  background: linear-gradient(135deg, var(--neon-2), var(--neon));
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow:
+    0 10px 30px rgba(143,61,255,0.24),
+    0 0 24px rgba(196,0,255,0.16);
+  transition: transform var(--ease), box-shadow var(--ease), filter var(--ease);
+}
+
+.cta-button:hover{
+  transform: translateY(-2px);
+  box-shadow:
+    0 18px 44px rgba(143,61,255,0.30),
+    0 0 34px rgba(196,0,255,0.20);
+}
+
+.cta-button:active{
+  transform: translateY(0);
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+.sidebar h3,
+.sidebar h4{
+  color: #e9c3ff !important;
+  margin-bottom: 0.6rem;
+  line-height: 1.35;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.sidebar h3{
+  font-size: 1rem;
+}
+
+.sidebar h4{
+  font-size: 0.92rem;
+  margin-top: 1.2rem !important;
+}
+
+.sidebar p{
+  margin: 0;
+}
+
+.sidebar strong{
+  color: var(--white);
+  font-weight: 800;
+  word-break: break-word;
+}
+
+/* =========================
+   INLINE STYLE OVERRIDES
+========================= */
+.contact-main [style*="margin-bottom:0.75rem"]{
+  margin-bottom: 1rem !important;
+}
+
+.contact-main [style*="margin-top:0.5rem"]{
+  margin-top: 0.75rem !important;
+}
+
+.contact-main label[style]{
+  color: var(--text-soft) !important;
+}
+
+.sidebar h3[style],
+.sidebar h4[style]{
+  color: #e9c3ff !important;
+}
+
+/* =========================
+   FOCUS ACCESSIBILITY
+========================= */
+:where(input, textarea, button):focus-visible{
+  outline: 3px solid rgba(196,0,255,0.35);
+  outline-offset: 3px;
+}
+
+.message-field{
+  margin-bottom: 1rem;
+}
+
+.checkbox-label{
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 920px){
+  .contact-main{
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px){
+  .contact-hero{
+    padding: 3.8rem 1rem 2.5rem;
+  }
+
+  .contact-main{
+    margin: 1.8rem auto 3rem;
+    gap: 1rem;
+  }
+
+  .hire-form,
+  .sidebar{
+    padding: 1.3rem 1rem;
+    border-radius: 22px;
+  }
+
+  .form-row{
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+
+  .submit-row{
+    align-items: stretch;
+  }
+
+  .submit-row > div:last-child{
+    width: 100%;
+  }
+
+  .cta-button{
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px){
+  .contact-hero h1{
+    font-size: 1.7rem;
+    letter-spacing: 0.12em;
+  }
+
+  .contact-hero p{
+    font-size: 0.95rem;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  textarea{
+    padding: 0.9rem 0.9rem;
+  }
+}

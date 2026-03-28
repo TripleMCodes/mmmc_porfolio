@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Conditions of Use — {{name.title()}}
+{% endblock %}
+
+{% block page_css %}
+  <link rel="stylesheet" href="{{url_for('conditions.static', filename='conditions.css')}}">
+{% endblock %}
+
+{% block header %}
+  <header class="terms-hero">
+    <h1>Conditions of Use</h1>
+    <p>These Conditions govern your access to and use of {{name.title()}}'s website and services. Please read them carefully.</p>
+  </header>
+{% endblock %}
+
+{% block content %}
+    <div class="last-updated">Last updated: December 3, 2025</div>
+
+    <section class="terms-section">
+      <h2>1. Acceptance of Terms</h2>
+      <p>By accessing or using this website ("Site") you agree to these Conditions of Use and our Privacy Policy. If you do not agree, please do not use the Site.</p>
+    </section>
+
+    <section class="terms-section">
+      <h2>2. Changes to the Terms</h2>
+      <p>We may update these Conditions from time to time. Continued use of the Site after changes constitutes acceptance of the updated terms. We recommend checking this page periodically for updates.</p>
+    </section>
+
+    <section class="terms-section">
+      <h2>3. Use of the Site</h2>
+      <p>You may use the Site for lawful purposes only. You agree not to:</p>
+      <ul>
+        <li>Violate any laws or third-party rights.</li>
+        <li>Upload or transmit malicious code, spam, or unsolicited advertising.</li>
+        <li>Attempt to access restricted areas of the Site or server resources.</li>
+      </ul>
+    </section>
+
+    <section class="terms-section">
+      <h2>4. User Accounts</h2>
+      <p>Certain features may require an account. You are responsible for maintaining the confidentiality of your account and password, and for all activities that occur under your account.</p>
+    </section>
+
+    <section class="terms-section">
+      <h2>5. Purchases, Tickets, and Payments</h2>
+      <p>When you purchase tickets, music, or services through the Site, you agree to the payment terms presented at checkout. All sales are final unless otherwise stated at the time of purchase. Third-party ticketing or payment processors may have separate terms and refund policies.</p>
+    </section>
+
+    <section class="terms-section">
+      <h2>6. Refunds & Cancellations</h2>
+      <p>Refund policies differ by event and product. For events, refunds are handled according to the event organizer's policy. Contact us via <a href="{{url_for('contact.contact_route')}}">Contact</a> for questions about a specific purchase.</p>
+    </section>
+
+    <section class="terms-section">
+      <h2>7. Intellectual Property</h2>
+      <p>The Site, its content, and materials (including but not limited to text, graphics, logos, images, audio and video) are owned or licensed by {{name.title()}} and protected by copyright, trademark and other laws. You may not reproduce or use Site content without prior written permission except as permitted by these Conditions.</p>
+    </section>
+
+    <section class="terms-section">
+      <h2>8. User-Generated Content</h2>
+      <p>If you submit comments, photos, or other content to the Site, you grant {{name.title()}} a worldwide, non-exclusive, royalty-free license to use, reproduce, adapt, publish, and display that content in connection with the Site and promotion of our services, unless otherwise agreed in writing.</p>
+    </section>
+
+    <section class="terms-section">
+      <h2>9. DMCA & Copyright</h2>
+      <p>If you believe your copyrighted work has been infringed, please notify us with a DMCA takedown request containing the required information. We will respond as required by applicable law.</p>
+    </section>
+
+    <section class="terms-section">
+      <h2>10. Disclaimers</h2>
+      <p>The Site is provided "as is" and "as available" without warranties of any kind. To the fullest extent permitted by law, {{name.title()}} disclaims all warranties, express or implied, including merchantability and fitness for a particular purpose.</p>
+    </section>
+
+    <section class="terms-section">
+      <h2>11. Limitation of Liability</h2>
+      <p>To the maximum extent permitted by law, {{name.title()}} will not be liable for any indirect, incidental, consequential, special or punitive damages arising out of or relating to your use of the Site.</p>
+    </section>
+
+    <section class="terms-section">
+      <h2>12. Indemnification</h2>
+      <p>You agree to indemnify, defend and hold harmless {{name.title()}} and its affiliates from any claims, liabilities, damages, and expenses arising from your violation of these Conditions or your use of the Site.</p>
+    </section>
+
+    <section class="terms-section">
+      <h2>13. Termination</h2>
+      <p>We may suspend or terminate access to the Site at our discretion, with or without notice, for conduct that violates these Conditions or is harmful to other users.</p>
+    </section>
+
+    <section class="terms-section">
+      <h2>14. Governing Law</h2>
+      <p>These Conditions are governed by the laws of the jurisdiction where {{name.title()}} operates, without regard to conflict of law principles. Any dispute arising out of or relating to these Conditions will be subject to the exclusive jurisdiction of the courts in that jurisdiction.</p>
+    </section>
+
+    <section class="terms-section">
+      <h2>15. Contact</h2>
+      <p>If you have questions about these Conditions, please contact us at <a href="mailto:{{email}}">{{email}}</a> or use the <a href="{{url_for('contact.contact_route')}}">Contact</a> page.</p>
+    </section>
+{% endblock %}
+
+{% block page_js %}
+  <script src="{{ url_for('conditions.static', filename='conditions.js') }}"></script>
+{% endblock %}

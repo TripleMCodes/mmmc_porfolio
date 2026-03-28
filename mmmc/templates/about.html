@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% block title %}
+  About {{ name }}
+{% endblock %}
+
+{% block page_css %}
+  <link rel="stylesheet" href="{{ url_for('about.static', filename='about.css') }}">
+{% endblock %}
+
+{% block header %}
+  <header class="about-hero">
+    <h1 class="about-logo">{{ hero.hero_title }}</h1>
+    <p class="brief">{{ hero.hero_brief }}</p>
+  </header>
+{% endblock %}
+
+{% block content %}
+        <section class="bio-section">
+            <div class="bio-grid">
+                <div class="bio-visual">
+                <img src="{{ url_for('about.static', filename='img/icons8-open-book-50.png') }}" alt="book icon">
+                </div>
+               
+                <div class="bio-text">
+                <h2>The Foundation</h2>
+
+                <p>{{foundation[0].paragraphs}}</p>
+                </div>
+            </div>
+
+            <div class="bio-grid">
+                <div class="bio-text">
+                <h2>The Craft</h2>
+                
+                <p>{{foundation[1].paragraphs}}</p>
+                </div>
+
+                <div class="bio-visual">
+                <img src="{{ url_for('about.static', filename='img/icons8-radio-studio-50.png') }}" alt="mic icon">
+                </div>
+            </div>
+            </section>
+
+
+        <section class="bio-section">
+            <div class="timeline">
+                <h2> The Journey</h2>
+                {% for item in  journey_items%}
+                <div class="timeline-item">
+                    <div class="timeline-year">{{ item.year }}</div>
+                    <p>{{ item.desc }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        {# Expertise Section #}
+        <section class="bio-section">
+            <h2 >
+                {{ sections.get('expertise', {}).get('title') or 'Expertise & Specialties' }}
+            </h2>
+
+            <div class="expertise-grid" id="expertiseGrid">
+                {% for exp in expertise %}
+                <div class="expertise-card" data-exp-id="{{ exp.exp_id }}">
+                    <div class="expertise-icon">{{ exp.icon }}</div>
+                    <div class="expertise-title">{{ exp.expertise }}</div>
+                    <div class="expertise-desc">{{ exp.desc }}</div>
+                </div>
+                {% endfor %}
+
+                {# Optional: empty state #}
+                {% if expertise|length == 0 %}
+                <p style="text-align:center;opacity:0.7;">No expertise added yet.</p>
+                {% endif %}
+            </div>
+        </section>
+
+
+        <section class="testimonials">
+            <h2>
+                {{ sections.get('testimonials', {}).get('title') or 'What Artists Say' }}
+            </h2>
+
+  <div class="carousel">
+    <button class="carousel-btn" id="prevBtn">← Prev</button>
+
+    <div style="flex:1">
+      {% for t in testimonials %}
+        <div class="carousel-slide{% if loop.first %} active{% endif %}">
+          <div class="slide-quote">
+            "{{ t.testimonial }}"
+          </div>
+
+          <div class="slide-author">
+            — 
+            {% if t.artist_social %}
+              <a href="{{ t.artist_social }}" target="_blank" rel="noopener">
+                {{ t.artist_name }}
+              </a>
+            {% else %}
+              {{ t.artist_name }}
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+
+      {% if testimonials|length == 0 %}
+        <div class="carousel-slide active">
+          <div class="slide-quote">
+            "No testimonials yet."
+          </div>
+          <div class="slide-author">
+            — System
+          </div>
+        </div>
+      {% endif %}
+    </div>
+
+    <button class="carousel-btn" id="nextBtn">Next →</button>
+  </div>
+</section>
+
+
+        
+
+        {# CTA Section #}
+        <section class="cta-section" style="max-width:1000px;margin:3rem auto;padding:2rem 5%">
+            <h2>Get in Touch for Collaborations</h2>
+            <p style="color:#d1d5db;margin-bottom:1.5rem">Interested in featuring, remixing, or collaborating? Let's connect.</p>
+            <a href="{{url_for('contact.contact_route')}}" class="cta-button">Start a Project</a>
+        </section>
+{% endblock %}
+
+{% block page_js %}
+  <script src="{{ url_for('about.static', filename='about.js') }}"></script>
+{% endblock %}

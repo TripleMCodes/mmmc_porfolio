@@ -1,0 +1,146 @@
+/* =========================
+   POLICY — HOME THEME
+   White / Cream + Gold Aura
+========================= */
+
+:root{
+  --gold: #B78628;
+  --ink: #141414;
+  --muted: rgba(20,20,20,0.68);
+  --paper: #ffffff;
+  --cream: #f6f0e3;
+
+  --aura: rgba(132,201,240,0.22);
+  --line: rgba(0,0,0,0.06);
+  --shadow: rgba(0,0,0,0.10);
+}
+
+/* HERO */
+.policy-hero{
+  padding: 5rem 5% 2rem;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+
+  background:
+    radial-gradient(circle at 50% 28%, rgba(183,134,40,0.14), transparent 52%),
+    radial-gradient(circle at 50% 62%, var(--aura), transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,0.96), rgba(246,240,227,0.55));
+
+  border-bottom: 1px solid var(--line);
+  border-radius: 26px;
+  margin-top: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* soft halo */
+.policy-hero::after{
+  content:"";
+  position:absolute;
+  inset:-35%;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,0.65), transparent 56%),
+    radial-gradient(circle at 50% 50%, var(--aura), transparent 68%);
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.policy-hero h1{
+  color: var(--ink);
+  font-size: clamp(1.7rem, 3vw, 2.6rem);
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* gold divider */
+.policy-hero h1::after{
+  content:"";
+  display:block;
+  width: 92px;
+  height: 2px;
+  margin: 1rem auto 0;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.9;
+}
+
+/* INTRO */
+.policy-intro{
+  color: rgba(20,20,20,0.68);
+  max-width: 900px;
+  margin: 0.85rem auto 0;
+  line-height: 1.85;
+}
+
+/* MAIN */
+.policy-main{
+  max-width: 900px;
+  margin: 2rem auto 3.5rem;
+  padding: 0 5%;
+}
+
+/* SECTION CARDS */
+.policy-section{
+  background: rgba(255,255,255,0.82);
+  padding: 1.25rem 1.35rem;
+  border-radius: 22px;
+  margin-bottom: 1rem;
+
+  border: 1px solid rgba(183,134,40,0.18);
+  box-shadow: 0 14px 50px rgba(0,0,0,0.08);
+  backdrop-filter: blur(12px);
+  position: relative;
+  overflow: hidden;
+}
+
+/* gentle gold wash */
+.policy-section::before{
+  content:"";
+  position:absolute;
+  inset:-30%;
+  background: radial-gradient(circle at 20% 20%, rgba(183,134,40,0.10), transparent 55%);
+  opacity: 0.85;
+  pointer-events:none;
+}
+
+/* HEADINGS */
+.policy-section h2{
+  color: var(--ink);
+  margin-bottom: 0.6rem;
+  font-size: 1rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* TEXT */
+.policy-section p,
+.policy-section li{
+  color: rgba(20,20,20,0.72);
+  line-height: 1.85;
+}
+
+.policy-section ul{
+  margin-left: 1.1rem;
+  margin-top: 0.7rem;
+}
+
+.policy-section li::marker{
+  color: var(--gold);
+}
+
+/* MOBILE TIGHTENING */
+@media (max-width: 480px){
+  .policy-hero{
+    padding: 3.4rem 1.25rem 1.6rem;
+    border-radius: 22px;
+  }
+
+  .policy-section{
+    padding: 1.05rem 1.05rem;
+    border-radius: 18px;
+  }
+}

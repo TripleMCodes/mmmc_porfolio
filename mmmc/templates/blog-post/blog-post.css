@@ -1,0 +1,479 @@
+/* =========================
+   SINGLE BLOG POST — NEON DARK PURPLE / FUTURISTIC
+========================= */
+
+:root{
+  --bg-0: #05010b;
+  --bg-1: #0b0317;
+  --bg-2: #140426;
+  --bg-3: #1d0735;
+
+  --neon: #c400ff;
+  --neon-2: #8f3dff;
+  --neon-3: #f05dff;
+
+  --neon-soft: rgba(196, 0, 255, 0.16);
+  --neon-soft-2: rgba(143, 61, 255, 0.12);
+  --neon-line: rgba(214, 115, 255, 0.18);
+  --neon-glow: rgba(196, 0, 255, 0.38);
+
+  --white: #f8f1ff;
+  --text: #eadbff;
+  --text-soft: rgba(234, 219, 255, 0.74);
+  --text-faint: rgba(234, 219, 255, 0.52);
+
+  --glass: rgba(20, 8, 38, 0.64);
+  --glass-strong: rgba(25, 10, 46, 0.78);
+
+  --line: rgba(214, 115, 255, 0.12);
+
+  --radius-xl: 28px;
+  --radius-lg: 22px;
+  --radius-md: 18px;
+  --radius-pill: 999px;
+
+  --blur: 14px;
+
+  --shadow-md: 0 14px 44px rgba(0,0,0,0.18);
+  --shadow-lg: 0 18px 64px rgba(0,0,0,0.24);
+  --shadow-xl: 0 24px 78px rgba(0,0,0,0.30);
+
+  --ease: 0.2s ease;
+}
+
+/* =========================
+   POST HERO
+========================= */
+.post-hero{
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  padding: 4.6rem 1.25rem 3rem;
+  border-bottom: 1px solid var(--line);
+  background:
+    radial-gradient(circle at 50% 35%, rgba(196, 0, 255, 0.14), transparent 28%),
+    radial-gradient(circle at 50% 55%, rgba(143, 61, 255, 0.12), transparent 42%),
+    linear-gradient(180deg, rgba(20,4,38,0.82), rgba(7,2,14,0.94));
+}
+
+.post-hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.02) 28%, transparent 54%),
+    radial-gradient(circle at 20% 25%, rgba(240,93,255,0.08), transparent 22%),
+    radial-gradient(circle at 80% 20%, rgba(143,61,255,0.08), transparent 18%);
+}
+
+.post-hero::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:54%;
+  transform: translate(-50%, -50%);
+  width: min(620px, 88vw);
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,0.14), transparent 18%),
+    radial-gradient(circle at 50% 50%, rgba(240,93,255,0.10), transparent 34%),
+    radial-gradient(circle at 50% 50%, rgba(196,0,255,0.18), transparent 56%),
+    radial-gradient(circle at 50% 50%, rgba(143,61,255,0.10), transparent 74%);
+  box-shadow:
+    0 0 80px rgba(196,0,255,0.14),
+    0 0 150px rgba(143,61,255,0.08);
+  animation: postHeroPulse 6s ease-in-out infinite;
+}
+
+.post-hero > *{
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes postHeroPulse{
+  0%,100%{
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.92;
+  }
+  50%{
+    transform: translate(-50%, -50%) scale(1.05);
+    opacity: 1;
+  }
+}
+
+/* =========================
+   BACK LINK
+========================= */
+.post-hero a[href]{
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  text-decoration: none !important;
+  color: var(--white) !important;
+  font-size: 0.8rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(214,115,255,0.20);
+  background: rgba(255,255,255,0.04);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.14);
+  backdrop-filter: blur(10px);
+  transition:
+    transform var(--ease),
+    background var(--ease),
+    border-color var(--ease),
+    box-shadow var(--ease);
+}
+
+.post-hero a[href]:hover{
+  transform: translateY(-2px);
+  background: rgba(196,0,255,0.08);
+  border-color: rgba(214,115,255,0.34);
+  box-shadow:
+    0 16px 40px rgba(0,0,0,0.20),
+    0 0 20px rgba(196,0,255,0.08);
+}
+
+/* =========================
+   TITLE / META / EXCERPT
+========================= */
+.post-title{
+  font-size: clamp(2rem, 4.2vw, 3.4rem);
+  font-weight: 900;
+  color: var(--white);
+  line-height: 1.15;
+  letter-spacing: 0.04em;
+  margin-bottom: 1rem;
+  text-shadow:
+    0 0 12px rgba(196,0,255,0.18),
+    0 0 30px rgba(196,0,255,0.10);
+}
+
+.post-title::after{
+  content:"";
+  display:block;
+  width: 100px;
+  height: 2px;
+  margin: 1rem auto 0;
+  background: linear-gradient(90deg, transparent, var(--neon), transparent);
+  box-shadow: 0 0 12px var(--neon-glow);
+}
+
+.post-meta{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+  color: var(--text-faint);
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.post-date,
+#readingTime{
+  color: var(--text-faint);
+}
+
+.post-hero p[style]{
+  max-width: 900px !important;
+  margin: 0 auto;
+  color: var(--text-soft) !important;
+  font-style: italic;
+  line-height: 1.85;
+  font-size: 1rem;
+}
+
+/* =========================
+   ARTICLE WRAPPER
+========================= */
+.post-content{
+  position: relative;
+  max-width: 900px;
+  margin: 2.6rem auto 4rem;
+  padding: 2.4rem 2rem;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.02)),
+    rgba(18, 7, 32, 0.70);
+  border: 1px solid var(--line);
+  box-shadow:
+    var(--shadow-lg),
+    inset 0 0 0 1px rgba(255,255,255,0.02);
+  backdrop-filter: blur(var(--blur));
+  -webkit-backdrop-filter: blur(var(--blur));
+}
+
+.post-content::before{
+  content:"";
+  position:absolute;
+  inset:-30%;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(196,0,255,0.12), transparent 22%),
+    radial-gradient(circle at 82% 72%, rgba(143,61,255,0.10), transparent 26%);
+  opacity: 0.85;
+  pointer-events:none;
+}
+
+.post-content > *{
+  position: relative;
+  z-index: 1;
+}
+
+/* =========================
+   TYPOGRAPHY INSIDE POST
+========================= */
+.post-content h1,
+.post-content h2,
+.post-content h3,
+.post-content h4,
+.post-content h5,
+.post-content h6{
+  color: var(--white);
+  line-height: 1.25;
+  margin-top: 2rem;
+  margin-bottom: 0.9rem;
+  font-weight: 800;
+}
+
+.post-content h1{
+  font-size: 2.1rem;
+}
+
+.post-content h2{
+  font-size: 1.6rem;
+  letter-spacing: 0.03em;
+}
+
+.post-content h3{
+  font-size: 1.3rem;
+}
+
+.post-content h2::after,
+.post-content h3::after{
+  content:"";
+  display:block;
+  width: 64px;
+  height: 2px;
+  margin-top: 0.65rem;
+  background: linear-gradient(90deg, var(--neon), transparent);
+  box-shadow: 0 0 10px rgba(196,0,255,0.20);
+}
+
+.post-content p{
+  color: var(--text-soft);
+  font-size: 1rem;
+  line-height: 1.95;
+  margin-bottom: 1.15rem;
+  overflow-wrap: anywhere;
+}
+
+.post-content strong{
+  color: var(--white);
+}
+
+.post-content em{
+  color: rgba(248, 241, 255, 0.88);
+}
+
+.post-content a{
+  color: #f2b6ff;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(214,115,255,0.28);
+  transition: color var(--ease), border-color var(--ease), text-shadow var(--ease);
+}
+
+.post-content a:hover{
+  color: var(--white);
+  border-color: rgba(214,115,255,0.44);
+  text-shadow: 0 0 10px rgba(196,0,255,0.16);
+}
+
+/* =========================
+   LISTS
+========================= */
+.post-content ul,
+.post-content ol{
+  margin: 0 0 1.25rem 1.4rem;
+  color: var(--text-soft);
+  line-height: 1.85;
+}
+
+.post-content li{
+  margin-bottom: 0.55rem;
+}
+
+.post-content li::marker{
+  color: rgba(240,93,255,0.72);
+}
+
+/* =========================
+   BLOCKQUOTES
+========================= */
+.post-content blockquote{
+  margin: 1.6rem 0;
+  padding: 1.15rem 1.25rem;
+  border-left: 3px solid rgba(196,0,255,0.55);
+  border-radius: 0 16px 16px 0;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015)),
+    rgba(28, 11, 48, 0.58);
+  box-shadow:
+    0 12px 28px rgba(0,0,0,0.16),
+    inset 0 0 0 1px rgba(255,255,255,0.02);
+}
+
+.post-content blockquote p{
+  margin: 0;
+  font-style: italic;
+  color: rgba(248,241,255,0.86);
+}
+
+/* =========================
+   CODE
+========================= */
+.post-content code{
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 0.94em;
+  color: #ffd7ff;
+  background: rgba(255,255,255,0.05);
+  padding: 0.18rem 0.42rem;
+  border-radius: 8px;
+  border: 1px solid rgba(214,115,255,0.14);
+}
+
+.post-content pre{
+  overflow-x: auto;
+  margin: 1.4rem 0;
+  padding: 1rem;
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.018)),
+    rgba(10, 4, 20, 0.78);
+  border: 1px solid rgba(214,115,255,0.14);
+  box-shadow: 0 14px 34px rgba(0,0,0,0.20);
+}
+
+.post-content pre code{
+  background: transparent;
+  border: 0;
+  padding: 0;
+  color: #f7d3ff;
+}
+
+/* =========================
+   IMAGES / MEDIA
+========================= */
+.post-content img,
+.post-content video,
+.post-content iframe{
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.6rem auto;
+  border-radius: 18px;
+  border: 1px solid rgba(214,115,255,0.14);
+  box-shadow:
+    0 16px 40px rgba(0,0,0,0.20),
+    0 0 20px rgba(196,0,255,0.04);
+}
+
+/* =========================
+   TABLES
+========================= */
+.post-content table{
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  overflow: hidden;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(214,115,255,0.14);
+}
+
+.post-content th,
+.post-content td{
+  padding: 0.85rem 0.9rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(214,115,255,0.08);
+  color: var(--text-soft);
+}
+
+.post-content th{
+  color: var(--white);
+  background: rgba(196,0,255,0.06);
+}
+
+/* =========================
+   HORIZONTAL RULE
+========================= */
+.post-content hr{
+  border: 0;
+  height: 1px;
+  margin: 2rem 0;
+  background: linear-gradient(90deg, transparent, rgba(214,115,255,0.28), transparent);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 720px){
+  .post-hero{
+    padding: 3.8rem 1rem 2.5rem;
+  }
+
+  .post-content{
+    margin: 1.8rem auto 3rem;
+    padding: 1.5rem 1.1rem;
+    border-radius: 22px;
+  }
+
+  .post-title{
+    font-size: 1.8rem;
+  }
+
+  .post-meta{
+    font-size: 0.76rem;
+  }
+
+  .post-content h1{
+    font-size: 1.8rem;
+  }
+
+  .post-content h2{
+    font-size: 1.35rem;
+  }
+
+  .post-content h3{
+    font-size: 1.15rem;
+  }
+
+  .post-content p{
+    font-size: 0.98rem;
+    line-height: 1.85;
+  }
+}
+
+@media (max-width: 480px){
+  .post-title{
+    font-size: 1.55rem;
+    line-height: 1.2;
+  }
+
+  .post-hero a[href]{
+    font-size: 0.72rem;
+    padding: 0.7rem 0.9rem;
+  }
+
+  .post-content{
+    padding: 1.2rem 0.95rem;
+  }
+}

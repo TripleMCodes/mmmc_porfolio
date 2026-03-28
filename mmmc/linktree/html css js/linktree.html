@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{name.title()}} — Links</title>
+  <!-- <link rel="stylesheet" href="{{url_for('home.static', filename='index.css')}}"> -->
+  <link rel="stylesheet" href="{{url_for('linktree.static', filename='linktree.css')}}">
+</head>
+<body>
+
+  <!-- background image -->
+  {% if banner_pic %}
+    <img src="{{ url_for('home.static', filename='img/banner picture/' + banner_pic) }}" class="banner-overlay" alt="banner picture">
+  {% endif %}
+
+  <nav>
+    <div class="logo">{{name}}</div>
+    <ul class="nav-links">
+      <li><a href="{{url_for('home.index')}}">Home</a></li>
+      <li><a href="{{url_for('about.about_route')}}">About</a></li>
+      <li><a href="{{url_for('service.service_route')}}">Services</a></li>
+      <li><a href="{{url_for('all_blogs.index')}}">Blog</a></li>
+      <li><a href="{{url_for('contact.contact_route')}}">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="lt-wrap">
+    {% if profile_pic or "" %}
+      <img src="{{ url_for('home.static', filename='img/profile picture/' + profile_pic) }}" class="profile-pic" alt="profile picture">
+    {% else %}
+      <div class="lt-avatar">{{ config.avatar }}</div>
+    {% endif %}
+
+    <div class="lt-name">{{ config.name }}</div>
+    <div class="lt-handle">{{ config.handle }}</div>
+    <div class="lt-bio">{{ config.bio }}</div>
+
+    <div class="lt-links">
+      <h2 class="section-header">Social and streaming Links</h2>
+
+      <!-- CAROUSEL -->
+      <section class="carousel" data-carousel>
+        <button class="carousel-btn prev" type="button" data-carousel-prev aria-label="Previous">
+          ‹
+        </button>
+
+        <div class="carousel-viewport" data-carousel-viewport>
+          <div class="carousel-track" data-carousel-track>
+
+            <div class="streaming-card">
+              <div class="streaming-icon">
+                <img src="{{url_for('media.static', filename='img/icons8-spotify-48.png')}}" alt="Spotify icon">
+              </div>
+              <div class="streaming-title">Spotify</div>
+              <p class="streaming-desc">Listen on the world's largest music platform.</p>
+              <a href="{{ streaming.get('spotify','https://open.spotify.com/') }}" class="streaming-btn" target="_blank">Open Spotify</a>
+            </div>
+
+            <div class="streaming-card">
+              <div class="streaming-icon">
+                <img src="{{url_for('media.static', filename='img/icons8-soundcloud-48.png')}}" alt="soundcloud icon">
+              </div>
+              <div class="streaming-title">SoundCloud</div>
+              <p class="streaming-desc">Discover behind-the-scenes tracks and demos.</p>
+              <a href="{{ streaming.get('soundcloud','https://soundcloud.com/') }}" class="streaming-btn" target="_blank">Visit SoundCloud</a>
+            </div>
+
+            <div class="streaming-card">
+              <div class="streaming-icon">
+                <img src="{{url_for('media.static', filename='img/icons8-youtube-music-48.png')}}" alt="youtube music icon">
+              </div>
+              <div class="streaming-title">YouTube Music</div>
+              <p class="streaming-desc">Watch music videos and listen to the catalogue.</p>
+              <a href="{{ streaming.get('youtubemusic','https://music.youtube.com/') }}" class="streaming-btn" target="_blank">Open YouTube Music</a>
+            </div>
+
+            <div class="streaming-card">
+              <div class="streaming-icon">
+                <img src="{{url_for('media.static', filename='img/icons8-apple-music-48.png')}}" alt="Apple Music icon">
+              </div>
+              <div class="streaming-title">Apple Music</div>
+              <p class="streaming-desc">Stream with lossless audio quality.</p>
+              <a href="{{ streaming.get('applemusic','https://www.apple.com/apple-music/') }}" class="streaming-btn" target="_blank">Open Apple Music</a>
+            </div>
+
+            <div class="streaming-card">
+              <div class="streaming-icon">
+                <img src="{{url_for('media.static', filename='img/icons8-audiomack-48.png')}}" alt="AudioMack icon">
+              </div>
+              <div class="streaming-title">AudioMack</div>
+              <p class="streaming-desc">Access exclusive independent artist content.</p>
+              <a href="{{ streaming.get('audiomack','https://www.audiomack.com/') }}" class="streaming-btn" target="_blank">Visit AudioMack</a>
+            </div>
+
+            <div class="streaming-card">
+              <div class="streaming-icon">
+                <img src="{{url_for('media.static', filename='img/icons8-bandcamp-30.png')}}" alt="Bandcamp icon">
+              </div>
+              <div class="streaming-title">Bandcamp</div>
+              <p class="streaming-desc">Direct support: stream and purchase.</p>
+              <a href="{{ streaming.get('bandcamp','https://bandcamp.com/') }}" class="streaming-btn" target="_blank">Visit Bandcamp</a>
+            </div>
+
+            <div class="streaming-card">
+              <div class="streaming-icon">
+                <img src="{{url_for('media.static', filename='img/icons8-amazon-music-48.png')}}" alt="Amazon Music icon">
+              </div>
+              <div class="streaming-title">Amazon Music</div>
+              <p class="streaming-desc">Stream on Amazon Music.</p>
+              <a href="{{ streaming.get('amazon','https://music.amazon.com/') }}" class="streaming-btn" target="_blank">Open Amazon Music</a>
+            </div>
+
+          </div>
+        </div>
+
+        <button class="carousel-btn next" type="button" data-carousel-next aria-label="Next">
+          ›
+        </button>
+
+        <div class="carousel-dots" data-carousel-dots aria-label="Carousel pagination"></div>
+      </section>
+      <!-- /CAROUSEL -->
+
+    </div>
+
+    <div class="lt-small">
+      By using these links you agree to the site
+      <a href="{{url_for('terms.terms_route')}}">Terms</a>
+      and
+      <a href="{{url_for('privacy.privacy_route')}}">Privacy</a>
+    </div>
+  </div>
+
+  <script src="{{url_for('linktree.static', filename='linktree.js')}}"></script>
+  <!-- <script src="{{url_for('home.static', filename='script.js') }}"></script> -->
+</body>
+</html>

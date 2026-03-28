@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>
+    {% block title %}
+      {{ g.artist.name if g.artist else (name or "Site") }}
+    {% endblock %}
+  </title>
+
+  {# Global CSS (site-wide) #}
+  {% block global_css %}
+    <link rel="stylesheet" href="{{ url_for('home.static', filename='index.css') }}">
+  {% endblock %}
+
+  {# Page CSS (optional per page) #}
+  {% block page_css %}{% endblock %}
+
+  {# Icons #}
+  {% block head_extras %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  {% endblock %}
+  {% if ga_id %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ ga_id }}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '{{ ga_id }}');
+    </script>
+  {% endif %}
+</head>
+
+<body>
+  {# Ambient background layer #}
+  {% block particles %}
+    <div class="particles" id="particles"></div>
+  {% endblock %}
+
+  {# Primary navigation #}
+  {% block nav %}
+    <nav class="site-nav">
+      <div class="logo">
+        {{ (g.artist.name if g.artist else (name or ""))|upper }}
+      </div>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="{{ url_for('home.index') }}">Home</a></li>
+        <li><a href="{{ url_for('service.service_route') }}">Services</a></li>
+        <li><a href="{{ url_for('about.about_route') }}">About</a></li>
+        <li><a href="{{ url_for('media.media_route') }}">Media</a></li>
+        <li><a href="{{ url_for('all_blogs.index') }}">Blog</a></li>
+        <li><a href="{{ url_for('contact.contact_route') }}">Contact</a></li>
+        <li><a href="{{ url_for('events.events_route') }}">Events</a></li>
+        <li><a href="{{ url_for('gallery.gallery_route') }}">Gallery</a></li>
+        <li><a href="{{ url_for('linktree.linktree_route') }}">Linktree</a></li>
+        <li><a href="{{ url_for('linktree.linktree_route') }}">Linktree</a></li>
+      </ul>
+
+      <button class="h-menu" id="hamburger" aria-label="Toggle menu" type="button">
+        <span class="fa fa-bars" aria-hidden="true"></span>
+      </button>
+    </nav>
+  {% endblock %}
+
+  {# Optional motif strip (turn on per page if you want) #}
+  {% block motif_strip %}{% endblock %}
+
+  {# Page header (hero) #}
+  {% block header %}{% endblock %}
+
+  {# Main page content #}
+  <main class="{% block main_class %}page{% endblock %}">
+    {% block content %}{% endblock %}
+  </main>
+
+  {# Footer #}
+  {% block footer %}
+    <footer class="site-footer">
+      <div class="social-links">
+        <a href="{{ url_for('terms.terms_route') }}">Terms</a>
+        <a href="{{ url_for('conditions.conditions_route') }}">Conditions</a>
+        <a href="{{ url_for('privacy.privacy_route') }}">Privacy</a>
+      </div>
+
+      <p>
+        &copy; <span id="date"></span>
+        {{ (g.artist.name if g.artist else (name or "")).title() }}.
+        All rights reserved.
+      </p>
+    </footer>
+  {% endblock %}
+
+  {# Global JS (site-wide) #}
+  {% block global_js %}
+    <script src="{{ url_for('home.static', filename='script.js') }}"></script>
+  {% endblock %}
+
+  {# Page JS (optional per page) #}
+  {% block page_js %}{% endblock %}
+</body>
+</html>

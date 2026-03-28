@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Portfolio — Work Samples | Xarya</title>
+    <link rel="stylesheet" href="{{url_for('portfolio.static', filename='portfolio.css')}}">
+    <link rel="stylesheet" href="{{ url_for('home.static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+    <nav>
+        <div class="logo">XARYA</div>
+        <ul class="nav-links">
+             <li><a href="{{url_for('home.index')}}">Home</a></li>
+            <li><a href="{{url_for('about.about_route')}}">About</a></li>
+            <li><a href="{{url_for('service.service_route')}}">Services</a></li>
+            <li><a href="{{url_for('all_blogs.index')}}">Blog</a></li>
+            <li><a href="{{url_for('contact.contact_route')}}">Contact</a></li>
+        </ul>
+    </nav>
+
+    <header class="portfolio-hero">
+        <h1>Proof of Skill — Work Samples</h1>
+        <p class="portfolio-intro">Selected collaborations, ghostwriting excerpts, and experiments demonstrating phonetic design, flow engineering, and narrative craft.</p>
+    </header>
+
+    <div class="filters" aria-hidden="false">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="verses">Verses</button>
+        <button class="filter-btn" data-filter="hooks">Hooks</button>
+        <button class="filter-btn" data-filter="ghostwriting">Ghostwriting</button>
+        <button class="filter-btn" data-filter="consulting">Consulting</button>
+        <button class="filter-btn" data-filter="experimental">Experimental</button>
+        <div style="margin-left:auto; min-width:220px; text-align:right"><input id="portfolioSearch" type="search" placeholder="Search samples..." style="padding:0.45rem 0.6rem;border-radius:8px;border:1px solid rgba(168,85,247,0.08);background:rgba(15,23,42,0.6);color:#e6edf3;width:100%"></div>
+    </div>
+
+    <main>
+        <section class="portfolio-grid" id="portfolioGrid">
+            <article class="sample-card" data-tags="verses,experimental" data-title="Quantum Cadence">
+                <div class="sample-thumb">🎚️</div>
+                <div class="sample-body">
+                    <div class="sample-title">Quantum Cadence</div>
+                    <div class="sample-desc">A dense 16-bar verse engineered around internal rhyme gravity and rapid-fire consonant clusters.</div>
+                    <div class="sample-tags"><span class="tag">Verses</span><span class="tag">Experimental</span></div>
+                    <div class="sample-cta">
+                        <a class="view-btn" href="#" data-detail="Quantum Cadence|A dense 16-bar verse engineered around internal rhyme gravity and rapid-fire consonant clusters.|verses,experimental">Preview</a>
+                        <a class="view-btn" href="{{url_for('contact.contact_route')}}">Hire</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="sample-card" data-tags="hooks,ghostwriting" data-title="Chorus: Night Signal">
+                <div class="sample-thumb">🎵</div>
+                <div class="sample-body">
+                    <div class="sample-title">Chorus: Night Signal</div>
+                    <div class="sample-desc">A hook written to maximize singability while preserving lyrical ambiguity for multiple artist voices.</div>
+                    <div class="sample-tags"><span class="tag">Hooks</span><span class="tag">Ghostwriting</span></div>
+                    <div class="sample-cta">
+                        <a class="view-btn" href="#" data-detail="Chorus: Night Signal|A hook written to maximize singability while preserving lyrical ambiguity for multiple artist voices.|hooks,ghostwriting">Preview</a>
+                        <a class="view-btn" href="{{url_for('contact.contact_route')}}">Hire</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="sample-card" data-tags="ghostwriting,consulting" data-title="Voice Match: EP">
+                <div class="sample-thumb">📝</div>
+                <div class="sample-body">
+                    <div class="sample-title">Voice Match: EP</div>
+                    <div class="sample-desc">Selected ghostwritten passages demonstrating voice-adaptive phrasing across several tracks.</div>
+                    <div class="sample-tags"><span class="tag">Ghostwriting</span><span class="tag">Consulting</span></div>
+                    <div class="sample-cta">
+                        <a class="view-btn" href="#" data-detail="Voice Match: EP|Selected ghostwritten passages demonstrating voice-adaptive phrasing across several tracks.|ghostwriting,consulting">Preview</a>
+                        <a class="view-btn" href="{{url_for('contact.contact_route')}}">Hire</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="sample-card" data-tags="consulting,experimental" data-title="Phonetic Blueprint">
+                <div class="sample-thumb">🧭</div>
+                <div class="sample-body">
+                    <div class="sample-title">Phonetic Blueprint</div>
+                    <div class="sample-desc">Consulting notes and applied phonetic edits that increased intelligibility in dense flows.</div>
+                    <div class="sample-tags"><span class="tag">Consulting</span><span class="tag">Experimental</span></div>
+                    <div class="sample-cta">
+                        <a class="view-btn" href="#" data-detail="Phonetic Blueprint|Consulting notes and applied phonetic edits that increased intelligibility in dense flows.|consulting,experimental">Preview</a>
+                        <a class="view-btn" href="{{url_for('contact.contact_route')}}">Hire</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Additional samples can be added here -->
+        </section>
+    </main>
+
+    <div class="overlay" id="overlay">
+        <div class="modal" role="dialog" aria-modal="true">
+            <div class="modal-header">
+                <strong id="modalTitle"></strong>
+                <button id="modalClose" class="view-btn">Close</button>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+            <div style="margin-top:1rem;text-align:right"><a id="modalHire" class="view-btn" href="{{url_for('contact.contact_route')}}">Hire for this</a></div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="social-links">
+            <a href="{{url_for('terms.terms_route')}}">Terms</a>
+            <a href="{{url_for('conditions.conditions_route')}}">Conditions</a>
+            <a href="{{url_for('privacy.privacy_route')}}">Privacy</a>
+        </div>
+        <p>&copy; 2025 Xarya. All rights reserved.</p>
+    </footer>
+
+    <script src="{{url_for('home.static', filename='script.js') }}"></script>
+    <script src="{{url_for('portfolio.static', filename='portfolio.js')}}"></script>
+</body>
+</html>

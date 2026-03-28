@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{name.title()}} — Links</title>
+  <!-- <link rel="stylesheet" href="{{url_for('home.static', filename='index.css')}}"> -->
+  <link rel="stylesheet" href="{{url_for('linktree.static', filename='linktree.css')}}">
+</head>
+<body>
+
+  {% if banner_picture_url %}
+    <img  src="{{ banner_picture_url }}" class="banner-overlay" alt="banner picture">
+  {% endif %}
+
+  <nav>
+    <div class="logo">{{name}}</div>
+     <ul class="nav-links" id="navLinks">
+        <li><a href="{{ url_for('home.index') }}">Home</a></li>
+      </ul>
+  </nav>
+
+  <div class="lt-wrap">
+    {% if profile_picture_url or "" %}
+      <img  src="{{ profile_picture_url }}" class="profile-pic" alt="profile picture">
+    {% else %}
+      <div class="lt-avatar">{{ config.avatar }}</div>
+    {% endif %}
+
+    <div class="lt-name">{{ name }}</div>
+    <div class="lt-handle">{{ config.handle }}</div>
+    <div class="lt-bio">{{ config.bio }}</div>
+
+    <div class="lt-links">
+      <h2 class="section-header">Social and streaming Links</h2>
+
+      <!-- CAROUSEL -->
+      <section class="carousel" data-carousel>
+        <!-- <button class="carousel-btn prev" type="button" data-carousel-prev aria-label="Previous">
+          ‹
+        </button> -->
+
+        <!-- <div class="carousel-viewport" data-carousel-viewport> -->
+          <div class="carousel-track" data-carousel-track>
+
+           
+            {% set platforms = [
+              {
+                "key": "spotify",
+                "name": "Spotify",
+                "desc": "Listen on the world's largest music platform.",
+                "icon": "img/icons8-spotify-48.png",
+                "btn": "Open Spotify"
+              },
+              {
+                "key": "soundcloud",
+                "name": "SoundCloud",
+                "desc": "Discover behind-the-scenes tracks and demos.",
+                "icon": "img/icons8-soundcloud-48.png",
+                "btn": "Visit SoundCloud"
+              },
+              {
+                "key": "youtubemusic",
+                "name": "YouTube Music",
+                "desc": "Watch music videos and listen to the catalogue.",
+                "icon": "img/icons8-youtube-music-48.png",
+                "btn": "Open YouTube Music"
+              },
+              {
+                "key": "applemusic",
+                "name": "Apple Music",
+                "desc": "Stream with lossless audio quality.",
+                "icon": "img/icons8-apple-music-48.png",
+                "btn": "Open Apple Music"
+              },
+              {
+                "key": "audiomack",
+                "name": "Audiomack",
+                "desc": "Access exclusive independent artist content.",
+                "icon": "img/icons8-audiomack-48.png",
+                "btn": "Visit Audiomack"
+              },
+              {
+                "key": "bandcamp",
+                "name": "Bandcamp",
+                "desc": "Direct support: stream and purchase.",
+                "icon": "img/icons8-bandcamp-30.png",
+                "btn": "Visit Bandcamp"
+              },
+              {
+                "key": "amazonmusic",
+                "name": "Amazon Music",
+                "desc": "Stream on Amazon Music.",
+                "icon": "img/icons8-amazon-music-48.png",
+                "btn": "Open Amazon Music"
+              },
+              {
+                "key": "itunes",
+                "name": "iTunes",
+                "desc": "Buy and download music on iTunes.",
+                "icon": "img/icons8-itunes-64.png",
+                "btn": "Open iTunes"
+              },
+              {
+                "key": "youtube",
+                "name": "YouTube",
+                "desc": "Available on YouTube.",
+                "icon": "img/icons8-youtube-48.png",
+                "btn": "Open YouTube"
+              },
+              {
+                "key": "instagram",
+                "name": "Instagram",
+                "desc": "Available on Instagram.",
+                "icon": "img/icons8-instagram-48.png",
+                "btn": "Open Instagram"
+              },
+              {
+                "key": "tiktok",
+                "name": "TikTok",
+                "desc": "Available on TikTok.",
+                "icon": "img/icons8-tiktok-94.png",
+                "btn": "Open TikTok"
+              },
+              {
+                "key": "facebook",
+                "name": "Facebook",
+                "desc": "Available on Facebook.",
+                "icon": "img/icons8-facebook-48.png",
+                "btn": "Open Facebook"
+              },
+              {
+                "key": "threads",
+                "name": "Threads",
+                "desc": "Available on Threads.",
+                "icon": "img/icons8-threads-50 - Copy.png",
+                "btn": "Open Threads"
+              },
+              {
+                "key": "x",
+                "name": "X",
+                "desc": "Available on X.",
+                "icon": "img/icons8-x-24.png",
+                "btn": "Open X"
+              }
+            ] %}
+
+            {% set s = streaming or {} %}
+
+            {% for platform in platforms %}
+              {% if s.get(platform.key) %}
+              <div class="streaming-card">
+                <div class="streaming-icon">
+                  <img src="{{ url_for('media.static', filename=platform.icon) }}"
+                      alt="{{ platform.name }} icon">
+                </div>
+
+                <div class="streaming-title">{{ platform.name }}</div>
+                <p class="streaming-desc">{{ platform.desc }}</p>
+
+                <a href="{{ s.get(platform.key)|trim }}"
+                  class="streaming-btn"
+                  target="_blank"
+                  rel="noopener noreferrer">
+                  {{ platform.btn }}
+                </a>
+              </div>
+              {% endif %}
+            {% endfor %}     
+          </div>
+        <!-- </div> -->
+
+        <!-- <button class="carousel-btn next" type="button" data-carousel-next aria-label="Next">
+          ›
+        </button> -->
+
+        <div class="carousel-dots" data-carousel-dots aria-label="Carousel pagination"></div>
+      </section>
+      <!-- /CAROUSEL -->
+
+    </div>
+
+    <div class="lt-small">
+      By using these links you agree to the site
+      <a href="{{url_for('terms.terms_route')}}">Terms</a>
+      and
+      <a href="{{url_for('privacy.privacy_route')}}">Privacy</a>
+    </div>
+  </div>
+
+  <script src="{{url_for('linktree.static', filename='linktree.js')}}"></script>
+  <!-- <script src="{{url_for('home.static', filename='script.js') }}"></script> -->
+</body>
+</html>

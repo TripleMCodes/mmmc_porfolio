@@ -1,0 +1,267 @@
+.admin-container {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background: rgba(30, 41, 59, 0.6);
+    border-radius: 20px;
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+.admin-title {
+    text-align: center;
+    font-size: 2.3rem;
+    margin-bottom: 2rem;
+    background: linear-gradient(135deg, #a855f7 0%, #c084fc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.section-editor {
+    background: rgba(255,255,255,0.05);
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(168,85,247,0.3);
+}
+
+.section-editor h3 {
+    color: #a855f7;
+    margin-bottom: 1rem;
+}
+
+input[type="text"], textarea {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 10px;
+    border: 1px solid rgba(168,85,247,0.3);
+    background: rgba(15,23,42,0.6);
+    color: #e0e0e0;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    outline: none;
+}
+
+textarea {
+    height: 150px;
+    resize: vertical;
+}
+
+.save-btn {
+    padding: 0.8rem 2rem;
+    background: linear-gradient(135deg, #a855f7 0%, #8b5cf6 100%);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.save-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(168,85,247,0.5);
+}
+
+.notification {
+    display: none;
+    color: #a855f7;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.notification.on {
+    display: block;
+}
+
+.json-editor {
+    background: rgba(0,0,0,0.3);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    font-family: monospace;
+    white-space: pre-wrap;
+}
+
+ .h-menu {
+  display: none;
+  cursor: pointer;
+  font-size: 1.4rem;
+}
+
+@media (max-width: 360px) {
+    .admin-container {
+        margin: 1.2rem 0.7rem;
+        padding: 1.2rem;
+        border-radius: 14px;
+        margin-top: 5rem;
+    }
+
+    .admin-title {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .section-editor {
+        padding: 1.2rem;
+    }
+
+    input[type="text"],
+    textarea {
+        font-size: 0.9rem;
+        padding: 0.8rem;
+    }
+
+    textarea {
+        height: 120px;
+    }
+
+    .save-btn {
+        width: 100%;
+        padding: 0.7rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    nav .logo {
+        font-size: 1rem;
+        padding: 0.75rem 1rem;
+    }
+
+    .h-menu {
+        display: block;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        gap: 1.5rem;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: #0f0f0f;
+        padding: 2rem;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (min-width: 361px) and (max-width: 480px) {
+    .admin-container {
+        margin: 2rem 1rem;
+        padding: 1.5rem;
+    }
+
+    .admin-title {
+        font-size: 1.8rem;
+    }
+
+    .section-editor {
+        padding: 1.5rem;
+    }
+
+    .save-btn {
+        width: 100%;
+    }
+
+    nav .logo {
+        font-size: 1rem;
+        padding: 0.75rem 1rem;
+    }
+
+    .h-menu {
+        display: block;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        gap: 1.5rem;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: #0f0f0f;
+        padding: 2rem;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+    .admin-container {
+        margin: 2.5rem 1.5rem;
+        padding: 1.8rem;
+    }
+
+    .admin-title {
+        font-size: 2rem;
+    }
+
+    .section-editor {
+        padding: 1.8rem;
+    }
+
+    .save-btn {
+        padding: 0.8rem 1.6rem;
+    }
+    nav .logo {
+        font-size: 1rem;
+        padding: 0.75rem 1rem;
+    }
+
+    .h-menu {
+        display: block;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        gap: 1.5rem;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: #0f0f0f;
+        padding: 2rem;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .admin-container {
+        max-width: 900px;
+        padding: 2rem;
+    }
+
+    .admin-title {
+        font-size: 2.2rem;
+    }
+
+    .section-editor {
+        padding: 2rem;
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1440px) {
+    .admin-container {
+        max-width: 1200px;
+    }
+}
+@media (min-width: 1441px) {
+    .admin-container {
+        max-width: 1400px;
+    }
+}
+

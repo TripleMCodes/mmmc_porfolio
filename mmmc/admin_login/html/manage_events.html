@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Events — Admin</title>
+    <link rel="stylesheet" href="{{ url_for('home.static', filename='index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('admin.static', filename='manage_events.css') }}">
+</head>
+<body>
+    <nav>
+        <div class="logo">Artist Admin</div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="{{ url_for('admin.admin_dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('admin.manage_events') }}">Manage Events</a></li>
+        </ul>
+
+        <div class="h-menu" id="hamburger" aria-label="Toggle menu">
+            <span class="fa fa-bars">t</span>
+        </div>
+    </nav>
+
+    <main class="admin-container">
+        <h1 style="text-align:center;color:#a855f7;margin-bottom:2rem">Manage Events</h1>
+
+        <div class="notification" id="notification"></div>
+
+        <div class="section">
+            <h3>Create New Event</h3>
+            <input type="text" id="newTitle" placeholder="Event Title" style="margin-bottom:.8rem">
+            <textarea id="newDescription" placeholder="Event Description (optional)"></textarea>
+            <input type="date" id="newDate" style="margin-bottom:.8rem">
+            <input type="time" id="newTime" placeholder="Time (optional)" style="margin-bottom:.8rem">
+            <input type="text" id="newLocation" placeholder="Location/Venue" style="margin-bottom:.8rem">
+            <input type="text" id="newImageUrl" placeholder="Image URL (optional)" style="margin-bottom:.8rem">
+            <button class="save-btn" onclick="createNewEvent()">Create Event</button>
+        </div>
+
+        <div class="section">
+            <h3>Upcoming & Past Events</h3>
+            <div class="events-grid" id="eventsList">
+                {% for event in events %}
+                <div class="event-card" data-id="{{ event.id }}">
+                    <div class="event-card-content">
+                        <div class="title">{{ event.title }}</div>
+                        <div class="date">📅 {{ event.date.strftime('%b %d, %Y') }}{% if event.time %} at {{ event.time.strftime('%H:%M') }}{% endif %}</div>
+                        {% if event.location %}<div class="location">📍 {{ event.location }}</div>{% endif %}
+                        {% if event.description %}<div style="color:#cbd5e1;margin-top:.5rem;font-size:0.9rem">{{ event.description }}</div>{% endif %}
+                    </div>
+                    <div class="event-card-actions">
+                        <button class="save-btn" onclick="editEventModal('{{ event.id }}', '{{ event.title }}', '{{ event.date }}', '{{ event.time }}', '{{ event.location }}', '{{ event.description}}', '{{ event.image_url }}')">Edit</button>
+                        <button class="delete-btn" onclick="deleteEvent('{{ event.id }}')">Delete</button>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% if not events %}
+            <p style="color:#cbd5e1;text-align:center">No events yet. Create one above!</p>
+            {% endif %}
+        </div>
+    </main>
+
+    <!-- Edit Event Modal -->
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeEditModal()">&times;</span>
+            <h2>Edit Event</h2>
+            <input type="hidden" id="editId">
+            <input type="text" id="editTitle" placeholder="Event Title" style="margin-bottom:.8rem">
+            <textarea id="editDescription" placeholder="Event Description (optional)"></textarea>
+            <input type="date" id="editDate" style="margin-bottom:.8rem">
+            <input type="time" id="editTime" style="margin-bottom:.8rem">
+            <input type="text" id="editLocation" placeholder="Location/Venue" style="margin-bottom:.8rem">
+            <input type="text" id="editImageUrl" placeholder="Image URL (optional)" style="margin-bottom:.8rem">
+            <button class="save-btn" onclick="saveEventEdit()">Save Changes</button>
+        </div>
+    </div>
+
+    <script>
+        function notify(message, type='success') {
+            const box = document.getElementById('notification');
+            box.textContent = message;
+            box.className = 'notification on ' + type;
+            setTimeout(() => box.classList.remove('on'), 3000);
+        }
+
+        function createNewEvent() {
+            const title = document.getElementById('newTitle').value.trim();
+            const description = document.getElementById('newDescription').value.trim();
+            const date = document.getElementById('newDate').value;
+            const time = document.getElementById('newTime').value;
+            const venue = document.getElementById('newLocation').value.trim();
+            const image_url = document.getElementById('newImageUrl').value.trim();
+
+            if (!title || !date) {
+                notify('Title and date are required', 'error');
+                return;
+            }
+
+            fetch('/create event', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({title, description, date, time, location: venue, image_url})
+            })
+            .then(r => r.json())
+            .then(j => {
+                if (j.message.includes('created')) {
+                    notify('Event created! Refresh to see it.', 'success');
+                    document.getElementById('newTitle').value = '';
+                    document.getElementById('newDescription').value = '';
+                    document.getElementById('newDate').value = '';
+                    document.getElementById('newTime').value = '';
+                    document.getElementById('newLocation').value = '';
+                    document.getElementById('newImageUrl').value = '';
+                    setTimeout(() => window.location.reload(), 1500);
+                } else {
+                    notify(j.message, 'error');
+                }
+            })
+            .catch(() => notify('Error creating event', 'error'));
+        }
+
+        function editEventModal(id, title, date, time, location, description, image_url) {
+            document.getElementById('editId').value = id;
+            document.getElementById('editTitle').value = title;
+            document.getElementById('editDate').value = date;
+            document.getElementById('editTime').value = time;
+            document.getElementById('editLocation').value = location;
+            document.getElementById('editDescription').value = description;
+            document.getElementById('editImageUrl').value = image_url;
+            document.getElementById('editModal').classList.add('open');
+        }
+
+        function closeEditModal() {
+            document.getElementById('editModal').classList.remove('open');
+        }
+
+        function saveEventEdit() {
+            const id = document.getElementById('editId').value;
+            const title = document.getElementById('editTitle').value.trim();
+            const description = document.getElementById('editDescription').value.trim();
+            const date = document.getElementById('editDate').value;
+            const time = document.getElementById('editTime').value;
+            const venue = document.getElementById('editLocation').value.trim();
+            const image_url = document.getElementById('editImageUrl').value.trim();
+
+            if (!title || !date) {
+                notify('Title and date are required', 'error');
+                return;
+            }
+
+            fetch(`/edit event/${id}`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({title, description, date, time, location: venue, image_url})
+            })
+            .then(r => r.json())
+            .then(j => {
+                notify(j.message, 'success');
+                closeEditModal();
+                setTimeout(() => window.location.reload(), 1000);
+            })
+            .catch(() => notify('Error updating event', 'error'));
+        }
+
+        function deleteEvent(id) {
+            if (confirm('Are you sure you want to delete this event?')) {
+                fetch(`/delete event/${id}`, {method: 'POST'})
+                .then(r => r.json())
+                .then(j => {
+                    notify(j.message, 'success');
+                    setTimeout(() => location.reload(), 1000);
+                })
+                .catch(() => notify('Error deleting event', 'error'));
+            }
+        }
+
+    const hamburger = document.getElementById("hamburger");
+    const navLinks = document.getElementById("navLinks");
+
+        hamburger.addEventListener("click", () => {
+            navLinks.classList.toggle("active");
+            }
+        )
+    </script>
+</body>
+</html>
