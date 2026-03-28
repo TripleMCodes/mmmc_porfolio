@@ -1,0 +1,214 @@
+.portfolio-hero{
+  position: relative;
+  z-index: 2;
+  padding: 4.4rem 1.25rem 2.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  overflow: hidden;
+
+  background:
+    radial-gradient(circle at 50% 35%, rgba(196, 0, 255, 0.14), transparent 28%),
+    radial-gradient(circle at 50% 55%, rgba(143, 61, 255, 0.12), transparent 42%),
+    linear-gradient(180deg, rgba(20,4,38,0.82), rgba(7,2,14,0.92));
+  border-bottom: 1px solid var(--line);
+}
+
+.portfolio-hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events: none;
+  background:
+    linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.025) 28%, transparent 54%),
+    radial-gradient(circle at 20% 25%, rgba(240,93,255,0.08), transparent 22%),
+    radial-gradient(circle at 80% 20%, rgba(143,61,255,0.08), transparent 18%);
+}
+
+.portfolio-hero::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:58%;
+  transform: translate(-50%, -50%);
+  width: min(560px, 86vw);
+  aspect-ratio: 1/1;
+  border-radius: 999px;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,0.14), transparent 18%),
+    radial-gradient(circle at 50% 50%, rgba(240,93,255,0.12), transparent 36%),
+    radial-gradient(circle at 50% 50%, rgba(196,0,255,0.18), transparent 58%),
+    radial-gradient(circle at 50% 50%, rgba(143,61,255,0.12), transparent 74%);
+  box-shadow:
+    0 0 80px rgba(196,0,255,0.14),
+    0 0 150px rgba(143,61,255,0.08);
+  opacity: 1;
+  animation: heroPulse 6s ease-in-out infinite;
+}
+
+
+.pagination {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+}
+
+.pagination a,
+.pagination span {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    border: 1px solid rgba(168,85,247,0.3);
+    color: #c084fc;
+    background: rgba(15,23,42,0.5);
+    transition: 0.3s;
+}
+
+.pagination a:hover {
+    background: #a855f7;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.active-page {
+    background: #a855f7;
+    color: white;
+    font-weight: bold;
+}
+
+
+/* -----------------------
+   Portfolio Grid
+----------------------- */
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+/* -----------------------
+   Card
+----------------------- */
+
+.portfolio-card {
+    background: rgba(30, 41, 59, 0.6);
+    border-radius: 20px;
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    padding: 1.5rem;
+    transition: 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.portfolio-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(168,85,247,0.4);
+}
+
+/* glowing edge */
+
+.portfolio-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        transparent,
+        rgba(168,85,247,0.15),
+        transparent
+    );
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.portfolio-card:hover::before {
+    opacity: 1;
+}
+
+/* -----------------------
+   Content
+----------------------- */
+
+.project-title {
+    color: #c084fc;
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+}
+
+.project-description {
+    color: #e2e8f0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+}
+
+/* -----------------------
+   Button
+----------------------- */
+
+.project-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.project-btn {
+    padding: 0.5rem 1.5rem;
+    border-radius: 10px;
+    text-decoration: none;
+    background: linear-gradient(135deg, #a855f7, #8b5cf6);
+    color: white;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.project-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(168,85,247,0.5);
+}
+
+
+.portfolio-hero h1 { 
+    color: #e9d5ff;
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+
+    text-shadow:
+        0 0 8px rgba(168,85,247,0.6),
+        0 0 18px rgba(168,85,247,0.3);
+}
+.portfolio-intro { color:#d1d5db; max-width:900px; margin:0.5rem auto }
+
+.filters { max-width:1100px; margin:1rem auto; padding:0 5%; display:flex; gap:0.5rem; flex-wrap:wrap; align-items:center }
+.filters button { background:rgba(30,41,59,0.6); color:#c4b5fd; border:1px solid rgba(168,85,247,0.08); padding:0.45rem 0.75rem; border-radius:999px; cursor:pointer }
+.filters button.active { background:linear-gradient(135deg,#a855f7,#8b5cf6); color:white }
+
+.portfolio-grid { max-width:1100px; margin:1.5rem auto; padding:0 5%; display:grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap:1rem }
+
+.sample-card { background:rgba(30,41,59,0.6); border:1px solid rgba(168,85,247,0.12); border-radius:12px; overflow:hidden; display:flex; flex-direction:column }
+.sample-thumb { height:160px; background:linear-gradient(135deg,#6366f1 0%,#a855f7 100%); display:flex; align-items:center; justify-content:center; font-size:3rem; color:rgba(255,255,255,0.2) }
+.sample-body { padding:1rem; display:flex; flex-direction:column; gap:0.5rem }
+.sample-title { color:#c4b5fd; font-weight:700 }
+.sample-desc { color:#d1d5db; font-size:0.95rem }
+.sample-tags { display:flex; gap:0.5rem; flex-wrap:wrap }
+.tag { background:rgba(15,23,42,0.6); color:#9ca3af; padding:0.25rem 0.5rem; border-radius:6px; font-size:0.85rem }
+.sample-cta { margin-top:auto; display:flex; justify-content:space-between; align-items:center }
+.view-btn { text-decoration:none; color:#fff; background:linear-gradient(135deg,#a855f7,#8b5cf6); padding:0.45rem 0.85rem; border-radius:999px; font-weight:600 }
+
+/* Modal */
+.overlay { position:fixed; left:0;top:0;right:0;bottom:0; background:rgba(0,0,0,0.6); display:none; align-items:center; justify-content:center; z-index:200 }
+.modal { background:rgba(12,18,34,0.96); max-width:900px; width:95%; border-radius:12px; padding:1rem; color:#e6edf3 }
+.modal-header { display:flex; justify-content:space-between; align-items:center; gap:1rem }
+.modal-body { margin-top:0.75rem }
+
+@media (max-width:720px){ .filters{ justify-content:center } }
