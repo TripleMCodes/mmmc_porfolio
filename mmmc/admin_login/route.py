@@ -1186,7 +1186,9 @@ def add_gallery_video():
     new_item = Gallery(
         type='video',
         url=url,
-        title=title
+        title=title,
+        cloud_url=""  # no cloud URL for videos, but keeping field for consistency
+
     )
     db.session.add(new_item)
     db.session.commit()
