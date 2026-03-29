@@ -37,7 +37,7 @@ def gallery_route():
     name = user.name.upper()
 
     ga_id = Client.query.filter_by(name='mmmc').first()
-    ga_id = ga_id.value if ga_id else None
+    ga_id = ga_id.ga4_measurement_id if ga_id else None
 
     # gallery_items = Gallery.query.order_by(Gallery.id).all()
 

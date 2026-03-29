@@ -36,7 +36,7 @@ def index():
     about = user.short_about if user else ""
 
     ga_id = Client.query.filter_by(name='mmmc').first()
-    ga_id = ga_id.value if ga_id else None
+    ga_id = ga_id.ga4_measurement_id if ga_id else None
 
     profile_pic_obj = ProfileImg.query.first()
     profile_picture_url = profile_pic_obj.profile_picture_url if profile_pic_obj else None

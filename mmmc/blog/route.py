@@ -19,7 +19,7 @@ def index():
     per_page = request.args.get("per_page", default=2, type=int)
 
     ga_id = Client.query.filter_by(name='mmmc').first()
-    ga_id = ga_id.value if ga_id else None
+    ga_id = ga_id.ga4_measurement_id if ga_id else None
 
     # guardrails (so someone can't request per_page=5000)
     per_page = max(1, min(per_page, 2))

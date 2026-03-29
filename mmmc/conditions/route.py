@@ -17,7 +17,7 @@ def conditions_route():
     user = User.query.first()
 
     ga_id = Client.query.filter_by(name='mmmc').first()
-    ga_id = ga_id.value if ga_id else None
+    ga_id = ga_id.ga4_measurement_id if ga_id else None
 
     admin = Admin.query.first()
     name = user.name.upper()

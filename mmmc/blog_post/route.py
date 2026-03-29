@@ -20,7 +20,7 @@ def blog_post( blog_id):
     blog_post = Blog.query.filter(Blog.id == blog_id).first_or_404()
 
     ga_id = Client.query.filter_by(name='mmmc').first()
-    ga_id = ga_id.value if ga_id else None
+    ga_id = ga_id.ga4_measurement_id if ga_id else None
 
     user = User.query.first()
 

@@ -27,6 +27,7 @@ def my_portfolio():
     per_page = 6
 
     ga_id = Client.query.filter_by(name='mmmc').first()
+    ga_id = ga_id.ga4_measurement_id
 
     pagination = Portfolio.query.order_by(
         Portfolio.id.desc()

@@ -18,6 +18,6 @@ def events_route():
     events_list = Event.query.order_by(Event.date.desc()).all()
     
     ga_id = Client.query.filter_by(name='mmmc').first()
-    ga_id = ga_id.value if ga_id else None
+    ga_id = ga_id.ga4_measurement_id if ga_id else None
     
     return render_template('events.html', events=events_list, name=name, ga_id=ga_id)

@@ -17,6 +17,7 @@ def service_route():
     user = User.query.first()
     name = user.name.upper() if user else "ARTIST"
     ga_id = Client.query.filter_by(name='mmmc').first()
+    ga_id = ga_id.ga4_measurement_id
 
     services = Service.query.all()
 

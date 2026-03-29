@@ -46,5 +46,5 @@ def contact_route():
     user = User.query.first()
     name = user.name.upper() if user else ''
     ga_id = Client.query.filter_by(name='mmmc').first()
-    ga_id = ga_id.value if ga_id else None
+    ga_id = ga_id.ga4_measurement_id if ga_id else None
     return render_template('contact.html', name=name, email=email, ga_id=ga_id)

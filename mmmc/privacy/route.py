@@ -15,7 +15,7 @@ privacy = Blueprint(
 def privacy_route():
 
     ga_id = Client.query.filter_by(name='mmmc').first()
-    ga_id = ga_id.value if ga_id else None
+    ga_id = ga_id.ga4_measurement_id if ga_id else None
     user = User.query.first()
     name = user.name.upper() if user else "ARTIST"
 
