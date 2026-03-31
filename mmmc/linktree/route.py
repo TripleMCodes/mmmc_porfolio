@@ -66,5 +66,7 @@ def linktree_route():
     profile_pic_obj = ProfileImg.query.first()
     profile_picture_url = profile_pic_obj.profile_picture_url if profile_pic_obj else None
     banner_picture_url = profile_pic_obj.banner_picture_url if profile_pic_obj else None
+
+    print(streaming)
     
     return render_template('linktree.html', links=links, config=config, name=name, profile_picture_url=profile_picture_url, banner_picture_url=banner_picture_url, streaming=streaming, ga_id=ga_id)

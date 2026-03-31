@@ -75,6 +75,7 @@ def _configure_database(app: Flask) -> None:
     # BASE_DIR = Path(__file__).resolve().parent
     # app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{BASE_DIR / 'portfolio.db'}"
     
+    
  
 def _init_auth(app: Flask) -> None:
     login_manager = LoginManager()
