@@ -67,14 +67,13 @@ def _configure_database(app: Flask) -> None:
     database_url = _normalize_database_url(os.getenv("DATABASE_URL"))
     if database_url:
         app.config["SQLALCHEMY_DATABASE_URI"] = database_url
-        # print("DB not present")
         print("The database is:")
         print(database_url)
         return
 
     # BASE_DIR = Path(__file__).resolve().parent
     # app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{BASE_DIR / 'portfolio.db'}"
-    
+   
     
  
 def _init_auth(app: Flask) -> None:

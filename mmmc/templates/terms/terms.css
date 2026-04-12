@@ -1,18 +1,18 @@
 /* =========================
-   TERMS — HOME THEME
-   White/Cream + Gold + Soft Blue Aura
+   TERMS — NEON PURPLE THEME
+   Dark Violet + Neon Glow
 ========================= */
 
 :root{
-  --gold: #B78628;
-  --ink: #141414;
-  --muted: rgba(20,20,20,0.68);
-  --paper: #ffffff;
-  --cream: #f6f0e3;
-
-  --aura: rgba(132, 201, 240, 0.22);
-  --line: rgba(0,0,0,0.06);
-  --shadow: rgba(0,0,0,0.10);
+  --bg: #090311;
+  --panel: rgba(18, 8, 42, 0.90);
+  --accent: #c600ff;
+  --accent-soft: rgba(198, 0, 255, 0.18);
+  --line: rgba(198, 0, 255, 0.20);
+  --text: #f5ecff;
+  --text-soft: rgba(245, 236, 255, 0.74);
+  --text-faint: rgba(245, 236, 255, 0.52);
+  --shadow: rgba(0, 0, 0, 0.35);
 }
 
 /* HERO */
@@ -25,9 +25,9 @@
   flex-direction: column;
 
   background:
-    radial-gradient(circle at 50% 30%, rgba(183,134,40,0.14), transparent 52%),
-    radial-gradient(circle at 50% 65%, rgba(132,201,240,0.12), transparent 60%),
-    linear-gradient(180deg, rgba(255,255,255,0.96), rgba(246,240,227,0.55));
+    radial-gradient(circle at 50% 30%, rgba(198, 0, 255, 0.18), transparent 42%),
+    radial-gradient(circle at 50% 65%, rgba(155, 61, 255, 0.14), transparent 44%),
+    linear-gradient(180deg, #14022d 0%, #090311 100%);
   border-bottom: 1px solid var(--line);
   border-radius: 26px;
   margin-top: 2rem;
@@ -35,7 +35,6 @@
   overflow: hidden;
 }
 
-/* soft aura orb */
 .terms-hero::after{
   content:"";
   position:absolute;
@@ -47,32 +46,32 @@
   border-radius: 999px;
   z-index: -1;
   background:
-    radial-gradient(circle at 50% 50%, rgba(255,255,255,0.65), transparent 56%),
-    radial-gradient(circle at 50% 50%, var(--aura), transparent 68%);
-  opacity: 0.9;
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,0.14), transparent 52%),
+    radial-gradient(circle at 50% 50%, var(--accent-soft), transparent 64%);
+  opacity: 0.95;
 }
 
 .terms-hero h1{
-  color: var(--ink);
+  color: var(--text);
   font-size: clamp(1.7rem, 3vw, 2.6rem);
   font-weight: 900;
   letter-spacing: 0.14em;
   text-transform: uppercase;
+  text-shadow: 0 0 18px rgba(198, 0, 255, 0.32);
 }
 
-/* gold divider under title */
 .terms-hero h1::after{
   content:"";
   display:block;
   width: 92px;
   height: 2px;
   margin: 1rem auto 0;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  opacity: 0.9;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  box-shadow: 0 0 18px rgba(198, 0, 255, 0.38);
 }
 
 .terms-intro{
-  color: rgba(20,20,20,0.68);
+  color: var(--text-soft);
   max-width: 900px;
   margin: 0.85rem auto 0;
   line-height: 1.85;
@@ -85,32 +84,31 @@
   padding: 0 5%;
 }
 
-/* SECTIONS (parchment glass cards) */
+/* SECTIONS (glass cards) */
 .terms-section{
-  background: rgba(255,255,255,0.82);
+  background: var(--panel);
   padding: 1.25rem 1.3rem;
   border-radius: 22px;
   margin-bottom: 1rem;
 
-  border: 1px solid rgba(183,134,40,0.18);
-  box-shadow: 0 14px 50px rgba(0,0,0,0.08);
-  backdrop-filter: blur(12px);
+  border: 1px solid var(--line);
+  box-shadow: 0 14px 50px var(--shadow);
+  backdrop-filter: blur(14px);
   position: relative;
   overflow: hidden;
 }
 
-/* subtle gold sheen */
 .terms-section::before{
   content:"";
   position:absolute;
   inset:-30%;
-  background: radial-gradient(circle at 20% 20%, rgba(183,134,40,0.10), transparent 55%);
+  background: radial-gradient(circle at 20% 20%, rgba(198, 0, 255, 0.10), transparent 55%);
   opacity: 0.85;
   pointer-events: none;
 }
 
 .terms-section h2{
-  color: var(--ink);
+  color: var(--text);
   margin-bottom: 0.6rem;
   font-size: 1rem;
   font-weight: 900;
@@ -120,7 +118,7 @@
 
 .terms-section p,
 .terms-section li{
-  color: rgba(20,20,20,0.72);
+  color: var(--text-soft);
   line-height: 1.85;
 }
 
@@ -130,10 +128,9 @@
 }
 
 .terms-section li::marker{
-  color: var(--gold);
+  color: var(--accent);
 }
 
-/* Optional: tighten on small screens */
 @media (max-width: 480px){
   .terms-hero{ padding: 3.4rem 1.25rem 1.6rem; border-radius: 22px; }
   .terms-section{ padding: 1.05rem 1.05rem; border-radius: 18px; }

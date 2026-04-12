@@ -1,75 +1,79 @@
 /* =========================
-   TERMS — HOME THEME
-   White/Cream + Gold + Soft Aura
+   TERMS — NEON PURPLE THEME
+   Dark + Violet + Neon Glow
 ========================= */
 
 :root{
-  --gold: #B78628;
-  --ink: #141414;
-  --muted: rgba(20,20,20,0.68);
-  --paper: #ffffff;
-  --cream: #f6f0e3;
-
-  --aura: rgba(132, 201, 240, 0.22);
-  --line: rgba(0,0,0,0.06);
-  --shadow: rgba(0,0,0,0.10);
+  --bg: #090311;
+  --panel: rgba(20, 8, 38, 0.88);
+  --panel-soft: rgba(32, 13, 55, 0.95);
+  --neon: #c600ff;
+  --neon-2: #9b3dff;
+  --neon-soft: rgba(198, 0, 255, 0.16);
+  --neon-line: rgba(198, 0, 255, 0.20);
+  --text: #f5ecff;
+  --text-soft: rgba(245, 236, 255, 0.76);
+  --text-faint: rgba(245, 236, 255, 0.52);
+  --border: rgba(196, 0, 255, 0.18);
+  --shadow: rgba(0, 0, 0, 0.35);
 }
 
 /* HERO */
 .terms-hero{
   padding: 5rem 5% 2rem;
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   text-align: center;
 
   background:
-    radial-gradient(circle at 50% 28%, rgba(183,134,40,0.14), transparent 52%),
-    radial-gradient(circle at 50% 62%, var(--aura), transparent 60%),
-    linear-gradient(180deg, rgba(255,255,255,0.96), rgba(246,240,227,0.55));
+    radial-gradient(circle at 50% 22%, rgba(198, 0, 255, 0.24), transparent 30%),
+    radial-gradient(circle at 25% 50%, rgba(155, 61, 255, 0.14), transparent 22%),
+    linear-gradient(180deg, #14022d 0%, #090311 100%);
 
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--neon-line);
   border-radius: 26px;
   margin-top: 2rem;
   position: relative;
   overflow: hidden;
 }
 
-/* soft halo orb */
+/* soft glow overlay */
 .terms-hero::after{
-  content:"";
-  position:absolute;
-  inset:-35%;
+  content: "";
+  position: absolute;
+  inset: -30%;
   background:
-    radial-gradient(circle at 50% 50%, rgba(255,255,255,0.65), transparent 56%),
-    radial-gradient(circle at 50% 50%, var(--aura), transparent 68%);
-  opacity: 0.9;
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.12), transparent 54%),
+    radial-gradient(circle at 50% 50%, var(--neon-soft), transparent 62%);
+  opacity: 0.95;
   pointer-events: none;
 }
 
 .terms-hero h1{
-  color: var(--ink);
+  color: var(--text);
   font-size: clamp(1.7rem, 3vw, 2.6rem);
   font-weight: 900;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   margin-bottom: 0.75rem;
+  text-shadow: 0 0 18px rgba(198, 0, 255, 0.32);
 }
 
-/* gold divider under title */
+/* neon divider under title */
 .terms-hero h1::after{
-  content:"";
-  display:block;
+  content: "";
+  display: block;
   width: 92px;
   height: 2px;
   margin: 1rem auto 0;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  opacity: 0.9;
+  background: linear-gradient(90deg, transparent, var(--neon), transparent);
+  box-shadow: 0 0 18px rgba(198, 0, 255, 0.38);
 }
 
 .terms-hero p{
-  color: rgba(20,20,20,0.68);
+  color: var(--text-soft);
   max-width: 900px;
   line-height: 1.85;
   margin: 0.6rem auto 0;
@@ -84,40 +88,40 @@
 
 /* LAST UPDATED */
 .last-updated{
-  color: rgba(20,20,20,0.55);
+  color: var(--text-faint);
   font-size: 0.92rem;
-  text-align:center;
+  text-align: center;
   margin: 0 0 1.25rem;
   letter-spacing: 0.06em;
 }
 
 /* SECTION CARDS */
 .terms-section{
-  background: rgba(255,255,255,0.82);
-  border: 1px solid rgba(183,134,40,0.18);
+  background: var(--panel);
+  border: 1px solid var(--border);
   border-radius: 22px;
   padding: 1.25rem 1.35rem;
   margin-bottom: 1rem;
 
-  box-shadow: 0 14px 50px rgba(0,0,0,0.08);
-  backdrop-filter: blur(12px);
+  box-shadow: 0 24px 70px var(--shadow);
+  backdrop-filter: blur(16px);
   position: relative;
   overflow: hidden;
 }
 
-/* subtle gold wash */
+/* subtle neon wash */
 .terms-section::before{
-  content:"";
-  position:absolute;
-  inset:-30%;
-  background: radial-gradient(circle at 20% 20%, rgba(183,134,40,0.10), transparent 55%);
+  content: "";
+  position: absolute;
+  inset: -30%;
+  background: radial-gradient(circle at 20% 20%, rgba(198, 0, 255, 0.10), transparent 55%);
   opacity: 0.85;
-  pointer-events:none;
+  pointer-events: none;
 }
 
 /* HEADINGS */
 .terms-section h2{
-  color: var(--ink);
+  color: var(--text);
   font-size: 1rem;
   margin-bottom: 0.6rem;
   font-weight: 900;
@@ -128,7 +132,7 @@
 /* TEXT */
 .terms-section p,
 .terms-section li{
-  color: rgba(20,20,20,0.72);
+  color: var(--text-soft);
   font-size: 0.98rem;
   line-height: 1.85;
 }
@@ -139,7 +143,7 @@
 }
 
 .terms-section li::marker{
-  color: var(--gold);
+  color: var(--neon);
 }
 
 /* MOBILE */
